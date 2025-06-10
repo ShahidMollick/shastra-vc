@@ -1,43 +1,42 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import Image from "next/image";
+import { motion } from "framer-motion";
 
-interface FeaturePoint {
+interface DNAPoint {
+  id: number;
   title: string;
+  subtitle: string;
   description: string;
-  icon?: string;
 }
 
 const WhyShastraVC: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [animationStage, setAnimationStage] = useState(0);
-  const [hoverIndex, setHoverIndex] = useState<number | null>(null);
+  const [hoveredItem, setHoveredItem] = useState<number | null>(null);
   
   // Refs for intersection observer
   const sectionRef = useRef<HTMLElement>(null);
 
-  // Key value propositions
-  const featurePoints: FeaturePoint[] = [
+  // Shastra DNA points
+  const dnaPoints: DNAPoint[] = [
     {
-      title: "Expertise in Frontier Tech and AI",
-      description: "We invest early in deeptech and AI—domains that are complex, data-intensive, and often lack immediate validation. We look for long-term potential, not short-term certainty, and support founders building toward breakthroughs that will shape the future.",
-      icon: "/icons/tech-expertise.svg"
+      id: 1,
+      title: "Founder First",
+      subtitle: "Been There, Done That",
+      description: "We've been in your shoes. We know how tough the early days can be. That's exactly why we built Shastra to help you avoid common pitfalls, offer honest feedback, and open up a network we've built over years of building, and backing companies."
     },
     {
-      title: "Operator-Led Engagement",
-      description: "Our team brings an operator's perspective. We've experienced the early stages of company-building and understand the challenges deeply. That means we stay involved, offer hands-on support when needed, and work alongside founders as active partners—not just passive investors.",
-      icon: "/icons/operator-led.svg"
+      id: 2,
+      title: "Active",
+      subtitle: "Beyond Board Meetings",
+      description: "We don't just show up at board meetings, we show up when it truly matters. Whether it's a midnight call across time zones, a GTM crisis, or a last-minute deck before your next round, we are there rolling up our sleeves."
     },
     {
-      title: "Aligned with the Founder Journey",
-      description: "At Shastra, every engagement begins with understanding the founder's perspective—the stage they're at, the decisions in front of them, and the ambition behind the company. This context-driven approach shapes how we support, respond, and build long-term alignment throughout the journey.",
-      icon: "/icons/founder-journey.svg"
-    },
-    {
-      title: "Commitment Beyond Capital",
-      description: "We lead rounds, reinvest with conviction, and remain responsive as the company evolves. Our continued support reflects the trust we place in our founders and the long-term nature of the companies we back.",
-      icon: "/icons/commitment.svg"
+      id: 3,
+      title: "Growth",
+      subtitle: "Tested Playbooks & Networks",
+      description: "We bring tested playbooks for your GTM, organization building, and fundraising. From refining your sales motion to mapping your next fundraise, we help you scale with clarity and connect you to our extended network of advisors."
     }
   ];
 
@@ -54,11 +53,10 @@ const WhyShastraVC: React.FC = () => {
           if (entry.target === sectionRef.current) {
             setIsVisible(true);
             
-            // Simplified animation stages
             if (entry.intersectionRatio >= 0.25 && animationStage < 1) {
               setAnimationStage(1);
-              setTimeout(() => setAnimationStage(2), 300);
-              setTimeout(() => setAnimationStage(3), 600);
+              setTimeout(() => setAnimationStage(2), 400);
+              setTimeout(() => setAnimationStage(3), 800);
             }
           }
         } else {
@@ -84,461 +82,215 @@ const WhyShastraVC: React.FC = () => {
   return (
     <section
       ref={sectionRef}
-      className={`relative py-16 sm:py-20 lg:py-24 xl:py-32 bg-[#FFFDF7] overflow-hidden transition-opacity duration-700 ease-out ${
+      className={`relative py-16 sm:py-20 lg:py-24 xl:py-32 bg-[#FFFDF7] overflow-hidden transition-all duration-1000 ease-out ${
         isVisible ? "opacity-100" : "opacity-0"
       }`}
     >
       {/* Background Grid Pattern */}
-      <div className="absolute inset-0 opacity-20">
+      <div className="absolute inset-0 opacity-10">
         <div className="absolute inset-0" style={{
           backgroundImage: `
-            linear-gradient(rgba(169, 0, 0, 0.15) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(169, 0, 0, 0.15) 1px, transparent 1px)
+            linear-gradient(rgba(169, 0, 0, 0.08) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(169, 0, 0, 0.08) 1px, transparent 1px)
           `,
-          backgroundSize: '80px 80px'
+          backgroundSize: '60px 60px'
         }}></div>
       </div>
 
-      {/* Background gradients */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-[rgba(255,253,247,0.4)] via-transparent to-[rgba(255,253,247,0.4)]"></div>
-        <div className="absolute inset-0 bg-gradient-to-b from-[rgba(255,253,247,0.4)] via-transparent to-[rgba(255,253,247,0.6)]"></div>
-        
-        <div className="absolute -right-20 top-20 w-[400px] h-[400px] lg:w-[600px] lg:h-[600px] rounded-full bg-gradient-to-bl from-[#A90000]/20 to-transparent blur-[80px] lg:blur-[100px] opacity-75"></div>
-        <div className="absolute -left-20 bottom-20 w-[350px] h-[350px] lg:w-[550px] lg:h-[550px] rounded-full bg-gradient-to-tr from-[#A90000]/18 to-transparent blur-[70px] lg:blur-[90px] opacity-70"></div>
-      </div>
-
       {/* Main content container */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header section */}
-        <div className="flex flex-col items-center mb-16 sm:mb-20 lg:mb-24">
+        <div className="text-center mb-20 sm:mb-24 lg:mb-28">
           {/* Badge */}
-          <div className={`mb-6 sm:mb-8 transition-all duration-500 ease-out ${
-            animationStage >= 1 ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
-          }`}>
-            <div className="flex items-center">
-              <div className="w-12 sm:w-16 h-px bg-gray-300"></div>
-              <span className="text-gray-500 text-xs font-light tracking-[0.25em] uppercase px-3 sm:px-4">
-                Why Shastra VC?
+          <motion.div 
+            className="mb-8 lg:mb-12"
+            initial={{ opacity: 0, y: 20 }}
+            animate={animationStage >= 1 ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+          >
+            <div className="flex items-center justify-center">
+              <div className="w-16 h-px bg-gray-300"></div>
+              <span className="text-gray-500 text-xs font-light tracking-[0.25em] uppercase px-4">
+                Our Philosophy
               </span>
-              <div className="w-12 sm:w-16 h-px bg-gray-300"></div>
+              <div className="w-16 h-px bg-gray-300"></div>
             </div>
-          </div>
+          </motion.div>
           
-          {/* Heading */}
-          <h2 className={`text-3xl sm:text-4xl lg:text-5xl xl:text-6xl text-[#A90000] font-light tracking-tight mb-4 sm:mb-6 text-center transition-all duration-600 ease-out ${
-            animationStage >= 1 ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-          }`} style={{ transitionDelay: "100ms" }}>
-            Why Shastra VC?
-          </h2>
+          {/* Main Heading */}
+          <motion.h2 
+            className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-light tracking-tight leading-[1.1] text-black mb-6 lg:mb-8"
+            initial={{ opacity: 0, y: 30 }}
+            animate={animationStage >= 1 ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+            transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
+          >
+            Shastra <span className="text-[#A90000]">DNA</span>
+          </motion.h2>
           
-          {/* Subheading */}
-          <p className={`text-gray-600 text-base sm:text-lg lg:text-xl font-light max-w-2xl lg:max-w-3xl text-center leading-relaxed transition-all duration-600 ease-out ${
-            animationStage >= 1 ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-          }`} style={{ transitionDelay: "200ms" }}>
-            We believe in working as true partners—bringing domain expertise, long-term conviction, and an operator's mindset to support founders building transformative deeptech and AI companies.
-          </p>
+          {/* Subtitle */}
+          <motion.p 
+            className="text-gray-600 text-lg sm:text-xl leading-relaxed font-light max-w-3xl mx-auto"
+            initial={{ opacity: 0, y: 20 }}
+            animate={animationStage >= 1 ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+          >
+            We believe in working as true partners, bringing domain expertise, long-term conviction, and an operator's mindset to support founders building transformative deeptech, climate tech and AI companies
+          </motion.p>
         </div>
-        
-        {/* Feature grid layout */}
-        <div className="grid-container">
-          
-          
-          <div className={`v-line-left transition-all duration-600 ease-out ${
-            animationStage >= 2 ? "opacity-100 scale-y-100" : "opacity-0 scale-y-0"
-          }`} style={{ transitionDelay: "200ms" }}></div>
-          
-          <div className={`v-line-right transition-all duration-600 ease-out ${
-            animationStage >= 2 ? "opacity-100 scale-y-100" : "opacity-0 scale-y-0"
-          }`} style={{ transitionDelay: "200ms" }}></div>
-          
-          {/* Feature grid */}
-          <div className="feature-grid">
-            {featurePoints.map((point, index) => (
-              <div 
-                key={point.title}
-                className={`feature-card ${index % 2 === 0 ? 'even' : 'odd'} transition-all duration-600 ease-out ${
-                  animationStage >= 3 ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-                }`}
-                style={{ transitionDelay: `${index * 100 + 400}ms` }}
-                onMouseEnter={() => setHoverIndex(index)}
-                onMouseLeave={() => setHoverIndex(null)}
-              >
-                <div className={`feature-card-inner ${hoverIndex === index ? 'hovered' : ''}`}>
-                  {/* Number indicator */}
-                  <div className="feature-number">
-                    <span>{index + 1}</span>
-                  </div>
-                  
-                  {/* Content */}
-                  <div className="feature-content">
-                    <h3 className="feature-title">{point.title}</h3>
-                    
-                    {/* Image */}
-                    <div className="feature-image-container">
-                      <Image 
-                        src={`/why-${index + 1}.png`}
-                        alt={point.title}
-                        fill
-                        className="feature-image"
-                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
-                        priority={index < 2}
-                        style={{ objectFit: 'cover' }}
-                      />
-                      <div className="feature-image-overlay"></div>
-                    </div>
-                    
-                    <p className="feature-description">{point.description}</p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
+
+        {/* DNA Grid Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-0 border-l border-gray-200">
+          {dnaPoints.map((point, index) => (
+            <DNAItem
+              key={point.id}
+              point={point}
+              index={index}
+              isVisible={animationStage >= 2}
+              onHover={setHoveredItem}
+              isHovered={hoveredItem === point.id}
+            />
+          ))}
         </div>
+
+        {/* Bottom Accent */}
+        <motion.div 
+          className="flex items-center justify-center mt-20 lg:mt-24"
+          initial={{ opacity: 0, scaleX: 0 }}
+          animate={animationStage >= 3 ? { opacity: 1, scaleX: 1 } : { opacity: 0, scaleX: 0 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+        >
+          <div className="w-32 h-px bg-gradient-to-r from-transparent via-[#A90000]/50 to-transparent"></div>
+        </motion.div>
       </div>
-
-      <style jsx>{`
-        .grid-container {
-          position: relative;
-          width: 100%;
-          padding-bottom: 32px;
-        }
-        
-        .h-line {
-          position: absolute;
-          top: 30px;
-          left: 50%;
-          transform: translateX(-50%);
-          width: 50%;
-          height: 1px;
-          background-color: rgba(169, 0, 0, 0.2);
-          transform-origin: center;
-          z-index: 1;
-        }
-        
-        .v-line-left, .v-line-right {
-          position: absolute;
-          top: 30px;
-          width: 1px;
-          height: 40px;
-          background-color: rgba(169, 0, 0, 0.2);
-          transform-origin: top;
-          z-index: 1;
-        }
-        
-        .v-line-left {
-          left: 25%;
-        }
-        
-        .v-line-right {
-          right: 25%;
-        }
-        
-        .feature-grid {
-          display: grid;
-          grid-template-columns: repeat(2, 1fr);
-          gap: 32px 24px;
-          position: relative;
-          z-index: 2;
-        }
-        
-        .feature-card {
-          position: relative;
-          min-height: 400px;
-        }
-        
-        .feature-card::before {
-          content: '';
-          position: absolute;
-          width: 1px;
-          height: 24px;
-          background-color: rgba(169, 0, 0, 0.2);
-          top: -24px;
-          z-index: 1;
-        }
-        
-        .feature-card.even::before {
-          left: 20px;
-        }
-        
-        .feature-card.odd::before {
-          right: 20px;
-        }
-        
-        .feature-card-inner {
-          position: relative;
-          border: 1px solid rgba(169, 0, 0, 0.08);
-          padding: 24px;
-          height: 100%;
-          min-height: 400px;
-          background-color: ;
-          backdrop-filter: blur(8px);
-          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-          display: flex;
-          flex-direction: column;
-        }
-        
-        .feature-card-inner.hovered {
-          border-color: rgba(169, 0, 0, 0.15);
-          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-          transform: translateY(-2px);
-        }
-        
-        .feature-number {
-          position: absolute;
-          top: -16px;
-          width: 32px;
-          height: 32px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          background-color: #A90000;
-          color: white;
-          font-size: 16px;
-          font-weight: 300;
-          transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-          z-index: 3;
-        }
-        
-        .feature-card.even .feature-number {
-          left: 20px;
-        }
-        
-        .feature-card.odd .feature-number {
-          right: 20px;
-        }
-        
-        .feature-card-inner.hovered .feature-number {
-          transform: scale(1.1);
-        }
-        
-        .feature-content {
-          display: flex;
-          flex-direction: column;
-          height: 100%;
-          flex: 1;
-        }
-        
-        .feature-title {
-          font-size: 1.25rem;
-          font-weight: 400;
-          color: #1a1a1a;
-          margin-bottom: 16px;
-          position: relative;
-          padding-bottom: 12px;
-          line-height: 1.3;
-        }
-        
-        .feature-title::after {
-          content: '';
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          width: 32px;
-          height: 1px;
-          background-color: #A90000;
-          transition: width 0.3s ease-out;
-        }
-        
-        .feature-card-inner.hovered .feature-title::after {
-          width: 48px;
-        }
-        
-        .feature-image-container {
-          position: relative;
-          width: 100%;
-          height: 160px;
-          margin-bottom: 16px;
-          overflow: hidden;
-          flex-shrink: 0;
-        }
-        
-        .feature-image {
-          object-fit: cover;
-          transition: all 0.4s ease-out;
-          filter: grayscale(100%) sepia(20%) hue-rotate(320deg) saturate(0.6) brightness(0.9);
-        }
-        
-        .feature-card-inner.hovered .feature-image {
-          transform: scale(1.03);
-          filter: grayscale(0%) sepia(0%) hue-rotate(0deg) saturate(1) brightness(1);
-        }
-        
-        .feature-image-overlay {
-          position: absolute;
-          inset: 0;
-          background: linear-gradient(180deg, rgba(169, 0, 0, 0.05) 0%, rgba(169, 0, 0, 0.1) 100%);
-          transition: opacity 0.3s ease-out;
-        }
-        
-        .feature-card-inner.hovered .feature-image-overlay {
-          opacity: 0.3;
-        }
-        
-        .feature-description {
-          font-size: 0.9rem;
-          font-weight: 300;
-          color: #4a4a4a;
-          line-height: 1.6;
-          flex: 1;
-        }
-
-        /* Tablet styles */
-        @media (max-width: 1023px) and (min-width: 768px) {
-          .feature-grid {
-            gap: 40px 20px;
-          }
-          
-          .feature-card-inner {
-            padding: 20px;
-            min-height: 380px;
-          }
-          
-          .feature-image-container {
-            height: 140px;
-          }
-          
-          .feature-title {
-            font-size: 1.1rem;
-          }
-          
-          .feature-description {
-            font-size: 0.85rem;
-          }
-        }
-
-        /* Mobile styles */
-        @media (max-width: 767px) {
-          .feature-grid {
-            grid-template-columns: 1fr;
-            gap: 48px;
-          }
-          
-          .h-line, .v-line-left, .v-line-right {
-            display: none;
-          }
-          
-          .feature-card {
-            min-height: 350px;
-          }
-          
-          .feature-card::before {
-            left: 50%;
-            transform: translateX(-50%);
-            top: -20px;
-            height: 20px;
-          }
-          
-          .feature-card.even::before, 
-          .feature-card.odd::before {
-            left: 50%;
-            right: auto;
-            transform: translateX(-50%);
-          }
-          
-          .feature-card-inner {
-            padding: 20px;
-            min-height: 350px;
-          }
-          
-          .feature-card.even .feature-number, 
-          .feature-card.odd .feature-number {
-            left: 50%;
-            right: auto;
-            transform: translateX(-50%);
-          }
-          
-          .feature-card-inner.hovered .feature-number {
-            transform: translateX(-50%) scale(1.1);
-          }
-          
-          .feature-image-container {
-            height: 120px;
-            margin-bottom: 12px;
-          }
-          
-          .feature-title {
-            font-size: 1.1rem;
-            margin-bottom: 12px;
-            padding-bottom: 8px;
-          }
-          
-          .feature-description {
-            font-size: 0.85rem;
-          }
-        }
-
-        /* Extra small screens */
-        @media (max-width: 480px) {
-          .feature-card-inner {
-            padding: 16px;
-            min-height: 320px;
-          }
-          
-          .feature-image-container {
-            height: 100px;
-          }
-          
-          .feature-title {
-            font-size: 1rem;
-          }
-          
-          .feature-description {
-            font-size: 0.8rem;
-            line-height: 1.5;
-          }
-        }
-
-        /* Large desktop optimizations */
-        @media (min-width: 1280px) {
-          .feature-grid {
-            gap: 48px 32px;
-          }
-          
-          .feature-card-inner {
-            padding: 32px;
-            min-height: 450px;
-          }
-          
-          .feature-image-container {
-            height: 180px;
-            margin-bottom: 20px;
-          }
-          
-          .feature-title {
-            font-size: 1.375rem;
-            margin-bottom: 20px;
-          }
-          
-          .feature-description {
-            font-size: 0.95rem;
-          }
-        }
-
-        /* Accessibility and reduced motion */
-        @media (prefers-reduced-motion: reduce) {
-          * {
-            animation: none !important;
-            transition-duration: 0.2s !important;
-            transition-delay: 0ms !important;
-          }
-          
-          .feature-card-inner.hovered {
-            transform: none;
-          }
-          
-          .feature-card-inner.hovered .feature-image {
-            transform: none;
-          }
-        }
-        
-        /* Focus states for accessibility */
-        .feature-card:focus-within .feature-card-inner {
-          border-color: rgba(169, 0, 0, 0.2);
-          box-shadow: 0 0 0 2px rgba(169, 0, 0, 0.1);
-        }
-      `}</style>
     </section>
+  );
+};
+
+// Minimalistic DNA Item Component
+const DNAItem: React.FC<{
+  point: DNAPoint;
+  index: number;
+  isVisible: boolean;
+  onHover: (id: number | null) => void;
+  isHovered: boolean;
+}> = ({ point, index, isVisible, onHover, isHovered }) => {
+  const [isItemHovered, setIsItemHovered] = useState(false);
+
+  return (
+    <motion.div
+      className="group relative border-r border-gray-200 last:border-r-0"
+      initial={{ opacity: 0, y: 40 }}
+      animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+      transition={{
+        duration: 0.8,
+        delay: index * 0.2,
+        ease: [0.25, 0.46, 0.45, 0.94]
+      }}
+      onMouseEnter={() => {
+        onHover(point.id);
+        setIsItemHovered(true);
+      }}
+      onMouseLeave={() => {
+        onHover(null);
+        setIsItemHovered(false);
+      }}
+    >
+      <div className="relative p-8 lg:p-12 min-h-[400px] lg:min-h-[500px] flex flex-col">
+        
+        {/* Number Badge */}
+        <div className="flex items-center mb-8">
+          <motion.div 
+            className="w-12 h-12 border-2 border-[#A90000] flex items-center justify-center text-[#A90000] font-medium text-lg mr-4"
+            whileHover={{ scale: 1.05 }}
+            transition={{ duration: 0.2 }}
+          >
+            {point.id}
+          </motion.div>
+          
+          {/* Animated Line */}
+          <motion.div 
+            className="h-px bg-[#A90000]"
+            initial={{ width: 40 }}
+            animate={{ width: isItemHovered ? 80 : 40 }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
+          />
+        </div>
+
+        {/* Content Section */}
+        <div className="flex-1 space-y-6">
+          {/* Title */}
+          <motion.h3 
+            className="text-2xl lg:text-3xl xl:text-4xl font-light tracking-tight leading-tight text-black"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: index * 0.1 + 0.3 }}
+          >
+            {point.title}
+          </motion.h3>
+          
+          {/* Subtitle */}
+          <motion.p 
+            className="text-[#A90000] text-sm font-medium uppercase tracking-[0.15em] leading-relaxed"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: index * 0.1 + 0.4 }}
+          >
+            {point.subtitle}
+          </motion.p>
+
+          {/* Separator Line */}
+          <motion.div 
+            className="w-full h-px bg-gradient-to-r from-gray-200 to-transparent"
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: 1 }}
+            transition={{ duration: 0.8, delay: index * 0.1 + 0.5 }}
+            style={{ transformOrigin: "left" }}
+          />
+          
+          {/* Description */}
+          <motion.p 
+            className="text-gray-700 leading-relaxed font-light text-sm lg:text-base tracking-wide"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: index * 0.1 + 0.6 }}
+          >
+            {point.description}
+          </motion.p>
+        </div>
+
+        {/* Bottom Accent */}
+        <motion.div 
+          className="mt-8 flex items-center"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: index * 0.1 + 0.7 }}
+        >
+          <motion.div 
+            className="h-px bg-[#A90000]"
+            initial={{ width: 24 }}
+            animate={{ width: isItemHovered ? 48 : 24 }}
+            transition={{ duration: 0.3 }}
+          />
+          <motion.div 
+            className="w-2 h-2 bg-[#A90000] ml-3"
+            animate={{ 
+              scale: isItemHovered ? 1.2 : 1,
+              rotate: isItemHovered ? 45 : 0 
+            }}
+            transition={{ duration: 0.3 }}
+          />
+        </motion.div>
+
+        {/* Hover Overlay */}
+        <motion.div 
+          className="absolute inset-0 border-l-2 border-transparent pointer-events-none"
+          animate={{ 
+            borderLeftColor: isItemHovered ? '#A90000' : 'transparent' 
+          }}
+          transition={{ duration: 0.3 }}
+        />
+      </div>
+    </motion.div>
   );
 };
 

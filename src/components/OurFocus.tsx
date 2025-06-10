@@ -8,8 +8,9 @@ interface FocusArea {
   id: number;
   title: string;
   image: string;
-  description: string;
+  shortDescription: string;
   detailedContent: string;
+  source?: string;
 }
 
 const OurFocus: React.FC = () => {
@@ -17,43 +18,50 @@ const OurFocus: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [selectedArea, setSelectedArea] = useState<number | null>(null);
   const [activeSlide, setActiveSlide] = useState(0);
+  const [animationStage, setAnimationStage] = useState(0);
   const sectionRef = useRef<HTMLDivElement>(null);
-  
+
   const focusAreas: FocusArea[] = [
     {
       id: 1,
-      title: "Frontier Tech",
+      title: "Deep Tech",
       image: "/focus-1.png",
-      description: "The increasing demand for SaaS products & services globally, driven by the need for businesses to become more efficient & competitive, is creating new opportunities for growth",
-      detailedContent: "Frontier technologies represent the cutting edge of innovation, including quantum computing, advanced materials, and next-generation space technologies. We invest in companies developing breakthrough solutions that push the boundaries of what's possible, creating foundational technologies that will reshape industries in the coming decades."
+      shortDescription:
+        "Space Tech, Aerospace & Defence Tech, Semiconductors, BioTech, Quantum Computing, Nanotechnology",
+      detailedContent:
+        "India's space sector alone is projected to reach $44B by 2033, while defense, biotech, and semiconductors are seeing renewed national focus. Frontier fields like quantum computing, nanotechnology, cybersecurity, advanced materials, and robotics are moving from lab to market with increasing velocity. These are not just technical disciplines—they are strategic domains that define national capability and global competitiveness.",
+      source:
+        "https://www.pib.gov.in/PressReleasePage.aspx?PRID=2068155#:~:text=At%20present%2C%20the%20Indian%20space,the%20space%20economy%20in%20India.",
     },
     {
       id: 2,
       title: "Climate Tech",
       image: "/focus-2.png",
-      description: "The increasing demand for SaaS products & services globally, driven by the need for businesses to become more efficient & competitive, is creating new opportunities for growth",
-      detailedContent: "We are committed to supporting innovations that address climate change and environmental sustainability. Our climate tech investments focus on renewable energy, carbon capture, sustainable agriculture, and other technologies that can help mitigate environmental impact while creating economic value and scalable solutions for a more sustainable future."
+      shortDescription:
+        "We invest in foundational technologies that push the frontier of science and engineering, including, Space Technology, Aerospace & Defence Systems, Semiconductors, Biotechnology, Quantum Computing, Nanotechnology",
+      detailedContent:
+        "India is projected to become the world's third-largest energy consumer by 2030, and with that comes an urgent need to decarbonize across energy, industry, mobility, and agriculture. Climatetech now spans everything from battery innovation and green hydrogen to climate-resilient agri-solutions and circular materials. The transition isn't optional—it's a trillion-dollar shift in how we power and preserve life. Founders working at this intersection of sustainability and scale have never been more critical.",
     },
     {
       id: 3,
-      title: "SaaS (AI/ML)",
+      title: "Software (AI/ML)",
       image: "/focus-3.png",
-      description: "The increasing demand for SaaS products & services globally, driven by the need for businesses to become more efficient & competitive, is creating new opportunities for growth",
-      detailedContent: "AI-driven SaaS platforms are transforming how businesses operate and scale. We invest in companies leveraging artificial intelligence and machine learning to create intelligent software solutions that automate processes, generate insights, and deliver unprecedented value across industries from healthcare to finance and beyond."
-    },
-    {
-      id: 4,
-      title: "Fintech",
-      image: "/focus-4.png",
-      description: "Innovative financial technologies are reshaping traditional banking, payments, and investment services, creating more accessible, efficient, and secure financial ecosystems globally",
-      detailedContent: "Our fintech investments focus on companies building the next generation of financial infrastructure, payment systems, and digital assets. We look for entrepreneurs who are democratizing access to financial services, improving financial inclusion, and creating more efficient markets through technological innovation."
+      shortDescription:
+        "We focus on AI-native software businesses across the full stack- AI Infrastructure & Developer Tools, Vertical AI Applications, Horizontal Platforms,  Cybersecurity & Consumer AI",
+      detailedContent:
+        "As AI moves from research to real-world deployment, India is poised to become a global hub for applied intelligence. With a strong developer base, growing cloud infra, and increasing enterprise adoption, AI-native SaaS products are gaining tailwinds across sectors—healthcare, logistics, productivity, fintech, and more. The future belongs to software that learns, adapts, and compounds value over time.",
     },
   ];
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        setIsVisible(entry.isIntersecting);
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          setTimeout(() => setAnimationStage(1), 100);
+          setTimeout(() => setAnimationStage(2), 400);
+          setTimeout(() => setAnimationStage(3), 700);
+        }
       },
       {
         root: null,
@@ -77,94 +85,143 @@ const OurFocus: React.FC = () => {
     setSelectedArea(null);
   };
 
-  const handlePrevSlide = () => {
-    setActiveSlide((prev) => (prev === 0 ? focusAreas.length - 1 : prev - 1));
-  };
-
-  const handleNextSlide = () => {
-    setActiveSlide((prev) => (prev === focusAreas.length - 1 ? 0 : prev + 1));
-  };
-
   return (
-    <section 
-      ref={sectionRef} 
-      className="our-focus-section py-16 md:py-24 lg:py-32 bg-white overflow-hidden"
+    <section
+      ref={sectionRef}
+      className={`relative py-16 sm:py-20 lg:py-24 xl:py-32 bg-[#FFFDF7] overflow-hidden transition-all duration-1000 ease-out font-['Poppins'] ${
+        isVisible ? "opacity-100" : "opacity-0"
+      }`}
       id="our-focus"
     >
-      <div className="container mx-auto px-4 relative">
-        {/* Section header with consistent typography */}
-        <div className="section-header mb-12 md:mb-16 lg:mb-20 relative">
-          <div className="header-badge inline-block mb-3 px-4 py-1 bg-white border border-gray-200 rounded-full text-sm font-medium text-gray-600">
-            Our Focus Areas
-          </div>
-          
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl text-gray-900 leading-[1] tracking-tight  mb-6 md:mb-0 max-w-2xl">
-              We are keen investors in <span className="text-[#A90000]">climate tech, frontier technologies, and AI-driven SaaS</span>
-            </h2>
-            
-            <div className="navigation-controls flex items-center space-x-4">
-              <button 
-                onClick={handlePrevSlide}
-                className="w-12 h-12 border border-gray-300 rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors focus:outline-none"
-                aria-label="Previous slide"
+      {/* Background Pattern - Consistent with other sections */}
+      <div className="absolute inset-0 opacity-20">
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `
+              linear-gradient(rgba(169, 0, 0, 0.15) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(169, 0, 0, 0.15) 1px, transparent 1px)
+            `,
+            backgroundSize: "80px 80px",
+          }}
+        ></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-[rgba(255,253,247,0.4)] via-transparent to-[rgba(255,253,247,0.4)]"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-[rgba(255,253,247,0.4)] via-transparent to-[rgba(255,253,247,0.6)]"></div>
+      </div>
+
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Section Header */}
+        <div className="mb-16 lg:mb-20">
+          {/* Two-column layout for heading and subheading */}
+          <div className="grid lg:grid-cols-12 gap-8 lg:gap-12">
+            <div className="lg:col-span-6">
+              {/* Badge */}
+              <div
+                className={`mb-8 transition-all duration-1000 ease-out ${
+                  animationStage >= 1
+                    ? "opacity-100 translate-y-0"
+                    : "opacity-0 translate-y-4"
+                }`}
               >
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M15 18l-6-6 6-6"/>
-                </svg>
-              </button>
-              <button 
-                onClick={handleNextSlide}
-                className="w-12 h-12 border border-gray-300 rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors focus:outline-none"
-                aria-label="Next slide"
+                <div className="flex items-center ">
+                  <div className="w-16 h-px bg-gray-300"></div>
+                  <span className="text-gray-500 text-xs font-light tracking-[0.25em] uppercase px-4">
+                    Our Focus Areas
+                  </span>
+                  <div className="w-16 h-px bg-gray-300"></div>
+                </div>
+              </div>
+              <h2
+                className={`text-4xl sm:text-5xl lg:text-6xl font-light tracking-tight leading-[1.1] text-black transition-all duration-1200 ease-out ${
+                  animationStage >= 1
+                    ? "opacity-100 translate-y-0"
+                    : "opacity-0 translate-y-6"
+                }`}
               >
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M9 18l6-6-6-6"/>
-                </svg>
-              </button>
+                We are keen investors in{" "}
+                <span className="text-[#A90000]">
+                    deeptech, climate tech and AI-driven software
+                </span>
+              </h2>
+            </div>
+            <div className="lg:col-span-6">
+              <div
+                className={`transition-all duration-1200 ease-out ${
+                  animationStage >= 1
+                    ? "opacity-100 translate-y-0"
+                    : "opacity-0 translate-y-6"
+                }`}
+                style={{ transitionDelay: "200ms" }}
+              >
+                <p className="text-gray-600 text-lg leading-relaxed text-right font-light">
+                  We back founders tackling humanity's most complex
+                  challenges where breakthrough science meets scalable
+                  solutions. From space technology to
+                  climate resilience and AI-native software, these aren't just
+                  investment themes; they're the building blocks of tomorrow's
+                  economy.
+                </p>
+              </div>
             </div>
           </div>
-          
-          <p className="text-gray-500 text-md font-light leading-relaxed max-w-3xl mt-6 md:mt-4 tracking-wide">
-            We are keen investors in climatetech, frontier technologies, and AI-driven SaaS—domains where deep science meets bold execution to solve hard problems and shape the next wave of innovation
-          </p>
-          
-          <div className="absolute left-0 right-0 bottom-0 h-px bg-gray-200"></div>
         </div>
 
-        {/* Mobile slider (visible on small screens) */}
-        <div className="md:hidden">
+        {/* Mobile Slider */}
+        <div
+          className={`md:hidden mb-12 transition-all duration-1000 ease-out ${
+            animationStage >= 2
+              ? "opacity-100 translate-y-0"
+              : "opacity-0 translate-y-8"
+          }`}
+        >
           <div className="relative overflow-hidden">
-            <div 
+            <div
               className="flex transition-transform duration-500 ease-out"
               style={{ transform: `translateX(-${activeSlide * 100}%)` }}
             >
               {focusAreas.map((area) => (
-                <div key={area.id} className="w-full flex-shrink-0 px-1">
-                  <div 
-                    className="focus-area-card relative h-[400px] border border-gray-200 overflow-hidden cursor-pointer"
-                    onClick={() => setSelectedArea(area.id)}
+                <div key={area.id} className="w-full flex-shrink-0">
+                  <div
+                    className="relative h-[500px] border-1 border-gray-300 overflow-hidden cursor-pointer group"
+                    // onClick={() => setSelectedArea(area.id)}
                   >
-                    <div className="w-full h-full">
+                    <div className="w-full h-full relative">
                       <Image
                         src={area.image}
                         alt={area.title}
                         fill
                         style={{ objectFit: "cover" }}
+                        className="transition-transform duration-700 group-hover:scale-105"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent"></div>
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-black/20"></div>
                     </div>
 
-                    <div className="absolute bottom-0 left-0 right-0 p-6 text-white z-10">
-                      <h3 className="text-xl font-bold mb-3 tracking-tight">{area.title}</h3>
-                      <p className="text-sm opacity-95 mb-4 font-light leading-relaxed">{area.description}</p>
-                      <button 
-                        className="text-white text-sm font-medium flex items-center gap-2 border-b border-white pb-0.5 hover:border-red-400 hover:text-red-400 transition-colors"
-                      >
-                        Know More
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                          <line x1="5" y1="12" x2="19" y2="12"></line>
-                          <polyline points="12 5 19 12 12 19"></polyline>
+                    {/* Text overlay */}
+                    <div className="absolute inset-0 p-6 flex flex-col justify-end text-white">
+                      <div className="space-y-3">
+                        <div className="w-12 h-px bg-[#A90000] mb-3"></div>
+                        <h3 className="text-xl font-medium tracking-tight">
+                          {area.title}
+                        </h3>
+                        <p className="text-sm text-white/80 font-light leading-relaxed line-clamp-3">
+                          {area.shortDescription}
+                        </p>
+                      </div>
+
+                      <button className="self-start flex items-center gap-2 text-white text-sm font-medium border-b border-white/40 pb-1 hover:border-[#A90000] hover:text-[#A90000] transition-all duration-300 group mt-4">
+                        Learn More
+                        <svg
+                          className="w-3 h-3 transition-transform duration-300 group-hover:translate-x-1"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M9 5l7 7-7 7"
+                          />
                         </svg>
                       </button>
                     </div>
@@ -173,141 +230,251 @@ const OurFocus: React.FC = () => {
               ))}
             </div>
           </div>
-          
+
+          {/* Mobile Navigation Dots */}
           <div className="flex justify-center mt-6 gap-2">
             {focusAreas.map((_, index) => (
-              <button 
+              <button
                 key={index}
-                className={`w-2 h-2 rounded-full ${activeSlide === index ? 'bg-[#A90000]' : 'bg-gray-300'}`}
-                onClick={() => setActiveSlide(index)}
+                className={`w-2 h-2 transition-all duration-300 ${
+                  activeSlide === index
+                    ? "bg-[#A90000] scale-125"
+                    : "bg-gray-300 hover:bg-gray-400"
+                }`}
+                // onClick={() => setActiveSlide(index)}
                 aria-label={`Go to slide ${index + 1}`}
               ></button>
             ))}
           </div>
         </div>
 
-        {/* Desktop grid layout (hidden on small screens) */}
-        <div className="hidden md:grid focus-areas-grid grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* Desktop Layout - Sharp edge design with overlay text */}
+        <div className="hidden md:grid grid-cols-3 gap-6 lg:gap-8">
           {focusAreas.map((area, index) => (
             <motion.div
               key={area.id}
-              className="focus-area-card relative overflow-hidden h-[400px] lg:h-[500px] border border-gray-200 cursor-pointer"
-              initial={{ opacity: 0, y: 30 }}
-              animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className={`focus-card relative overflow-hidden border-1 border-gray-300 cursor-pointer group transition-all duration-500 hover:shadow-xl hover:shadow-black/10 ${
+                animationStage >= 3
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-8"
+              }`}
+              // onClick={() => setSelectedArea(area.id)}
               onMouseEnter={() => setHoveredArea(area.id)}
               onMouseLeave={() => setHoveredArea(null)}
-              onClick={() => setSelectedArea(area.id)}
+              style={{ transitionDelay: `${index * 150}ms` }}
             >
-              <div className="focus-area-image w-full h-full">
+              {/* Image Container */}
+              <div className="relative h-120 lg:h-146 overflow-hidden">
                 <Image
                   src={area.image}
                   alt={area.title}
                   fill
-                  style={{ 
-                    objectFit: "cover",
-                    transition: "transform 0.8s ease-out",
-                    transform: hoveredArea === area.id ? "scale(1.05)" : "scale(1)"
-                  }}
+                  style={{ objectFit: "cover" }}
+                  className="transition-all duration-700 group-hover:scale-110"
                 />
-                <div 
-                  className={`absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent transition-opacity duration-300 ${
-                    hoveredArea === area.id ? 'opacity-90' : 'opacity-70'
+
+                {/* Base overlay - always visible */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
+
+                {/* Hover overlay */}
+                <div
+                  className={`absolute inset-0 bg-gradient-to-t from-black/95 via-black/70 to-black/30 transition-all duration-500 ${
+                    hoveredArea === area.id ? "opacity-100" : "opacity-0"
+                  }`}
+                ></div>
+
+                {/* Red accent overlay on hover */}
+                <div
+                  className={`absolute inset-0 bg-gradient-to-t from-[#A90000]/20 to-transparent transition-all duration-500 ${
+                    hoveredArea === area.id ? "opacity-100" : "opacity-0"
                   }`}
                 ></div>
               </div>
 
-              <div className="focus-area-content absolute bottom-0 left-0 right-0 p-6 text-white">
-                <h3 className="text-xl lg:text-2xl font-bold mb-2 tracking-tight">{area.title}</h3>
-                
-                <div 
-                  className={`description-wrapper overflow-hidden transition-all duration-500 ease-in-out ${
-                    hoveredArea === area.id ? 'max-h-[300px] opacity-100' : 'max-h-0 opacity-0'
-                  }`}
-                >
-                  <p className="mb-4 text-sm lg:text-base opacity-95 font-light leading-relaxed">{area.description}</p>
-                  <button 
-                    className="text-white text-sm font-medium flex items-center gap-2 border-b border-white pb-0.5 hover:border-red-400 hover:text-red-400 transition-colors"
+              {/* Text Overlay - Always visible title, description on hover */}
+              <div className="absolute inset-0 p-6 lg:p-8 flex flex-col justify-end text-white">
+                <div className="space-y-4">
+                  {/* Line accent */}
+                  <div
+                    className={`h-px bg-[#A90000] transition-all duration-500 ${
+                      hoveredArea === area.id ? "w-16" : "w-12"
+                    }`}
+                  ></div>
+
+                  {/* Title - always visible */}
+                  <h3 className="text-xl lg:text-2xl font-medium tracking-tight leading-tight">
+                    {area.title}
+                  </h3>
+
+                  {/* Short Description - appears on hover */}
+                  <div
+                    className={`transition-all duration-500 ease-out ${
+                      hoveredArea === area.id
+                        ? "opacity-100 translate-y-0 max-h-32"
+                        : "opacity-0 translate-y-2 max-h-0"
+                    }`}
                   >
-                    Know More
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <line x1="5" y1="12" x2="19" y2="12"></line>
-                      <polyline points="12 5 19 12 12 19"></polyline>
-                    </svg>
-                  </button>
+                    <p className="text-sm text-white/85 font-light leading-relaxed line-clamp-4 mb-4">
+                      {area.shortDescription}
+                    </p>
+
+                    {/* Learn More Button - appears on hover */}
+                    <button className="flex items-center gap-2 text-white text-xs font-medium border-b border-white/40 pb-1 hover:border-[#A90000] transition-all duration-300 group/btn">
+                      <span>Learn More</span>
+                      <svg
+                        className="w-3 h-3 transition-transform duration-300 group-hover/btn:translate-x-1"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M9 5l7 7-7 7"
+                        />
+                      </svg>
+                    </button>
+                  </div>
                 </div>
               </div>
 
-              {/* Decorative line that animates on hover */}
-              <div 
-                className={`absolute bottom-16 left-6 w-0 h-px bg-[#A90000] transition-all duration-500 ${
-                  hoveredArea === area.id ? 'w-24' : ''
+              {/* Sharp edge highlight on hover */}
+              <div
+                className={`absolute top-0 left-0 w-full h-px bg-[#A90000] transition-all duration-500 ${
+                  hoveredArea === area.id
+                    ? "opacity-100 scale-x-100"
+                    : "opacity-0 scale-x-0"
                 }`}
+                style={{ transformOrigin: "left" }}
+              ></div>
+
+              <div
+                className={`absolute bottom-0 left-0 w-full h-px bg-[#A90000] transition-all duration-500 ${
+                  hoveredArea === area.id
+                    ? "opacity-100 scale-x-100"
+                    : "opacity-0 scale-x-0"
+                }`}
+                style={{ transformOrigin: "right" }}
               ></div>
             </motion.div>
           ))}
         </div>
       </div>
 
-      {/* Modal */}
+      {/* Enhanced Modal with detailed content */}
       {selectedArea && (
-        <div 
-          className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 backdrop-blur-sm"
+        <div
+          className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4 backdrop-blur-sm"
           onClick={closeModal}
         >
-          <motion.div 
-            className="modal-content bg-white w-full max-w-3xl max-h-[90vh] overflow-auto rounded-lg shadow-xl"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3 }}
-            onClick={e => e.stopPropagation()}
+          <motion.div
+            className="bg-white w-full max-w-4xl max-h-[90vh] overflow-auto border-1 border-gray-300 shadow-2xl"
+            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
+            onClick={(e) => e.stopPropagation()}
           >
-            <div className="modal-header border-b border-gray-200 p-6 flex justify-between items-center">
-              <h3 className="text-2xl font-bold text-gray-900 tracking-tight">
-                {focusAreas.find(area => area.id === selectedArea)?.title}
-              </h3>
-              <button 
-                onClick={closeModal}
-                className="p-2 hover:bg-gray-100 rounded-full transition-colors"
-                aria-label="Close modal"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <line x1="18" y1="6" x2="6" y2="18"></line>
-                  <line x1="6" y1="6" x2="18" y2="18"></line>
-                </svg>
-              </button>
-            </div>
-            <div className="modal-body p-6">
-              <div className="modal-image relative h-72 mb-6 overflow-hidden rounded-lg">
+            {/* Modal Header */}
+            <div className="relative">
+              <div className="relative h-80">
                 <Image
-                  src={focusAreas.find(area => area.id === selectedArea)?.image || ""}
-                  alt={focusAreas.find(area => area.id === selectedArea)?.title || ""}
+                  src={
+                    focusAreas.find((area) => area.id === selectedArea)
+                      ?.image || ""
+                  }
+                  alt={
+                    focusAreas.find((area) => area.id === selectedArea)
+                      ?.title || ""
+                  }
                   fill
                   style={{ objectFit: "cover" }}
                   priority
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
-                <div className="absolute bottom-0 left-0 right-0 p-6">
-                  <h3 className="text-3xl font-bold text-white tracking-tight">{focusAreas.find(area => area.id === selectedArea)?.title}</h3>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+
+                {/* Close Button */}
+                <button
+                  onClick={closeModal}
+                  className="absolute top-6 right-6 w-10 h-10 bg-white/20 backdrop-blur-sm border-1 border-white/30 flex items-center justify-center text-white hover:bg-white/30 transition-all duration-300"
+                  aria-label="Close modal"
+                >
+                  <svg
+                    className="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
+                </button>
+
+                {/* Title Overlay */}
+                <div className="absolute bottom-0 left-0 right-0 p-8">
+                  <div className="w-16 h-px bg-[#A90000] mb-4"></div>
+                  <h3 className="text-3xl lg:text-4xl font-medium text-white tracking-tight">
+                    {focusAreas.find((area) => area.id === selectedArea)?.title}
+                  </h3>
                 </div>
               </div>
-              <div className="modal-content-text">
-                <h4 className="text-xl font-semibold mb-3 text-gray-900 tracking-tight">Overview</h4>
-                <p className="mb-6 text-gray-500 font-light leading-relaxed tracking-wide">
-                  {focusAreas.find(area => area.id === selectedArea)?.description}
-                </p>
-                <h4 className="text-xl font-semibold mb-3 text-gray-900 tracking-tight">Our Approach</h4>
-                <p className="mb-6 text-gray-500 font-light leading-relaxed tracking-wide">
-                  {focusAreas.find(area => area.id === selectedArea)?.detailedContent}
-                </p>
-                <div className="flex justify-end">
-                  <button 
-                    onClick={closeModal}
-                    className="px-5 py-2 border border-gray-300 rounded-lg hover:bg-gray-100 transition-colors text-gray-700 font-medium"
-                  >
-                    Close
-                  </button>
+            </div>
+
+            {/* Modal Content */}
+            <div className="p-8 lg:p-12">
+              <div className="space-y-8">
+                {/* Focus Areas */}
+                <div>
+                  <div className="w-12 h-px bg-[#A90000] mb-4"></div>
+                  <h4 className="text-lg font-medium mb-4 text-gray-900 tracking-tight">
+                    Focus Areas
+                  </h4>
+                  <p className="text-gray-600 font-light leading-relaxed text-base">
+                    {
+                      focusAreas.find((area) => area.id === selectedArea)
+                        ?.shortDescription
+                    }
+                  </p>
                 </div>
+
+                {/* Detailed Analysis */}
+                <div>
+                  <div className="w-12 h-px bg-[#A90000] mb-4"></div>
+                  <h4 className="text-lg font-medium mb-4 text-gray-900 tracking-tight">
+                    Market Context
+                  </h4>
+                  <p className="text-gray-600 font-light leading-relaxed text-base">
+                    {
+                      focusAreas.find((area) => area.id === selectedArea)
+                        ?.detailedContent
+                    }
+                  </p>
+                </div>
+
+                {/* Source (if available) */}
+                {focusAreas.find((area) => area.id === selectedArea)
+                  ?.source && (
+                  <div className="pt-4 border-t border-gray-200">
+                    <p className="text-xs text-gray-400 font-light">
+                      Source:{" "}
+                      <a
+                        href={
+                          focusAreas.find((area) => area.id === selectedArea)
+                            ?.source
+                        }
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[#A90000] hover:underline"
+                      >
+                        Government of India Press Release
+                      </a>
+                    </p>
+                  </div>
+                )}
               </div>
             </div>
           </motion.div>
@@ -315,32 +482,39 @@ const OurFocus: React.FC = () => {
       )}
 
       <style jsx>{`
-        .our-focus-section {
-          position: relative;
-        }
-        
-        .our-focus-section::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 50%;
-          transform: translateX(-50%);
-          width: 50px;
-          height: 1px;
-          background-color: rgba(169, 0, 0, 0.3);
+        .focus-card {
+          will-change: transform, opacity;
+          backface-visibility: hidden;
         }
 
+        .line-clamp-3 {
+          display: -webkit-box;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+        }
+
+        .line-clamp-4 {
+          display: -webkit-box;
+          -webkit-line-clamp: 4;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+        }
+
+        /* Consistent with other sections */
         @media (prefers-reduced-motion: reduce) {
           * {
             animation: none !important;
-            transition-duration: 0.1s !important;
+            transition-duration: 0.2s !important;
             transition-delay: 0ms !important;
           }
         }
-        
-        @media (max-width: 640px) {
-          .focus-area-card {
-            height: 350px;
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+          .focus-card {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
           }
         }
       `}</style>

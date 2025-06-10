@@ -1,0 +1,54 @@
+{
+  "news": [
+    {
+      "id": 1,
+      "title": "Sanlayan raises $21.7M crore from investors including Ashish Kacholia, Jungle Ventures and Shastra VC",
+      "source": "Economictimes",
+      "image": "https://img-cdn.publive.online/fit-in/1280x960/filters:format(webp)/entrackr/media/media_files/2025/05/22/anHVKaVmFEqcqasfxykB.png",
+      "excerpt": "Sanlayan, a startup focused on sustainable agriculture, has raised Rs186 crore in a funding round led by prominent investors including Ashish Kacholia and Lashit Sanghvi.",
+      "url": "https://economictimes.indiatimes.com/news/defence/sanlayan-raises-rs186-crore-from-investors-including-ashish-kacholia-lashit-sanghvi-and-jungle-ventures/articleshow/121719448.cms?from=mdr",
+      "publishedAt": "2025-06-09",
+      "favicon": "https://entrackr.com/favicon.ico"
+    },
+    {
+      "id": 2,
+      "title": "Deeptech startup ALT CARBON raises $12 Mn in seed round",
+      "source": "Entrackr",
+      "image": "https://img-cdn.publive.online/fit-in/1280x960/filters:format(webp)/entrackr/media/media_files/2025/05/22/anHVKaVmFEqcqasfxykB.png",
+      "excerpt": "DeepTech startup ALT CARBON raises $12 Mn in seed round from leading investors to scale their carbon capture technology solutions.",
+      "url": "https://techcrunch.com/2025/05/21/alt-carbon-scores-12m-seed-to-scale-carbon-removal-in-india/",
+      "publishedAt": "2024-12-10",
+      "favicon": "https://entrackr.com/favicon.ico"
+    },
+      {
+      "id": 3,
+      "title": "AvammuneTherapeutics, Posha, Inspecity others secure funding",
+      "source": "VCCircle",
+      "image": "https://www.vccircle.com/wp-content/uploads/2024/12/funding-news-collage.jpg",
+      "excerpt": "Multiple startups across healthcare, food tech, and inspection technology secure early-stage funding rounds.",
+      "url": "https://www.vccircle.com/avammunetherapeutics-posha-inspecity-others-secure-funding",
+      "publishedAt": "2024-12-05",
+      "favicon": "https://www.vccircle.com/favicon.ico"
+    },
+    {
+      "id": 4,
+      "title": "SaaS startup Simplismart raises $7 Mn in Series A funding",
+      "source": "Entrackr",
+      "image": "https://img-cdn.publive.online/fit-in/1280x960/filters:format(webp)/entrackr/media/post_attachments/wp-content/uploads/2024/10/Simplismart.png",
+      "excerpt": "Bengaluru-based SaaS startup Simplismart has secured $7 million in a Series A funding round led by Accel, with participation from Shastra VC, Titan Capital, and others",
+      "url": "https://www.forbes.com/sites/davidprosser/2024/10/17/how-simplismart-plans-to-power-the-ubiquity-of-generative-ai/",
+      "publishedAt": "2024-10-18",
+      "favicon": "https://entrackr.com/favicon.ico"
+    },
+    {
+      "id": 5,
+      "title": "Spacetech Startup Sisir Radar Bags Funding To Offer Imaging Solutions",
+      "source": "Inc42",
+      "image": "https://www.vccircle.com/wp-content/uploads/2024/12/funding-news-collage.jpg",
+      "excerpt": "Spacetech startup Sisir Radar has raised $1.5 Mn (INR 12.45 Cr) in its seed funding round led by Shastra VC. The round also saw participation from Riverwalk Holdings and INVSTT.The Kolkata-based startup, which claims to have built India’s first drone-borne synthetic aperture radar (SAR) system, will utilise the fresh funds to strengthen its research and development (R&D) and manufacturing capabilities. It aims to launch the world’s highest resolution L-band SAR satellite by the end of 2026.",
+      "url": "https://inc42.com/buzz/spacetech-startup-sisir-radar-bags-funding-to-offer-imaging-solutions/",
+      "publishedAt": "2025-2-28",
+      "favicon": "https://inc42.com/favicon.ico"
+    }
+  ]
+}

@@ -4,9 +4,14 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import SuccessStories from "@/components/SuccessStories";
 import FundingGlance from '../components/FundingGlance';
-import OurApproach from '../components/OurApproach'; // Added import
+import NewsHighlights from "@/components/NewsHighlights";
+import OurApproach from '../components/OurApproach';
 import WhyShastraVC from "@/components/WhyShastraVC";
+import Header from "@/components/Header";
 import OurFocus from "@/components/OurFocus";
+import Founders from "@/components/Founders";
+import Footer from "@/components/Footer";
+
 
 // StatCard component for animated stats
 function StatCard({ number, label, delay, isVisible }: { 
@@ -23,8 +28,8 @@ function StatCard({ number, label, delay, isVisible }: {
       const targetNumber = parseInt(number.replace(/[^\d]/g, '')) || 0;
       
       if (targetNumber > 0) {
-        const duration = 3000; // Increased to 3 seconds
-        const steps = 120; // Increased steps for smoother animation
+        const duration = 3000;
+        const steps = 120;
         const increment = targetNumber / steps;
         let current = 0;
         
@@ -44,11 +49,24 @@ function StatCard({ number, label, delay, isVisible }: {
     }
   }, [isVisible, number, hasAnimated]);
 
-  const displayNumber = number.includes('$') 
-    ? `$${count}M` 
-    : number.includes('+') 
-      ? `${count}+` 
-      : count.toString();
+  // Fixed display logic to handle both $ and + correctly
+  const displayNumber = (() => {
+    const hasDollar = number.includes('$');
+    const hasPlus = number.includes('+');
+    const hasM = number.includes('M');
+    
+    if (hasDollar && hasM && hasPlus) {
+      return `$${count}M+`;
+    } else if (hasDollar && hasM) {
+      return `$${count}M`;
+    } else if (hasDollar && hasPlus) {
+      return `$${count}+`;
+    } else if (hasPlus) {
+      return `${count}+`;
+    } else {
+      return count.toString();
+    }
+  })();
 
   return (
     <div 
@@ -57,7 +75,7 @@ function StatCard({ number, label, delay, isVisible }: {
       }`}
       style={{ transitionDelay: delay }}
     >
-      <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light text-gray-800 leading-tight mb-1 sm:mb-2 transition-colors duration-300 group-hover:text-[#A90000]">
+      <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-regular text-gray-800 leading-tight mb-1 sm:mb-2 transition-colors duration-300 group-hover:text-[#A90000]">
         {isVisible ? displayNumber : number}
       </h2>
       <p className="text-gray-600 text-xs sm:text-sm md:text-base font-normal whitespace-nowrap transition-colors duration-300 group-hover:text-gray-800">
@@ -71,13 +89,9 @@ export default function Home() {
   const [animationStage, setAnimationStage] = useState(0);
 
   useEffect(() => {
-    // Stage 1: Background text appears
     const timer1 = setTimeout(() => setAnimationStage(1), 100);
-    // Stage 2: Navigation appears
     const timer2 = setTimeout(() => setAnimationStage(2), 800);
-    // Stage 3: Main heading appears
     const timer3 = setTimeout(() => setAnimationStage(3), 1500);
-    // Stage 4: Content grid appears
     const timer4 = setTimeout(() => setAnimationStage(4), 2200);
 
     return () => {
@@ -90,47 +104,8 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-[#FFFDF7] font-['Poppins']">
-      {/* Navigation */}
-      <nav className={`flex items-center justify-between absolute w-full px-4 sm:px-6 md:px-8 lg:px-12 xl:px-20 py-4 sm:py-6 z-30 transition-all duration-1000 ease-out ${
-        animationStage >= 2 ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4'
-      }`}>
-        <div className="flex items-center">
-            <Image
-            src="/logo.svg"
-            alt="Shastra VC Logo"
-            width={32}
-            height={32}
-            priority
-            className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 transition-transform duration-300 hover:scale-110"
-            />
-        </div>
-
-        <div className="hidden md:flex items-center space-x-6 lg:space-x-8 text-gray-800">
-          <a href="#" className="hover:text-red-600 transition-all duration-300 text-sm lg:text-base relative group">
-            Home
-            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-red-600 transition-all duration-300 group-hover:w-full"></span>
-          </a>
-          <a href="#" className="hover:text-red-600 transition-all duration-300 text-sm lg:text-base relative group">
-            Portfolio
-            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-red-600 transition-all duration-300 group-hover:w-full"></span>
-          </a>
-          <a href="#" className="hover:text-red-600 transition-all duration-300 text-sm lg:text-base relative group">
-            News
-            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-red-600 transition-all duration-300 group-hover:w-full"></span>
-          </a>
-          <a href="#" className="hover:text-red-600 transition-all duration-300 text-sm lg:text-base relative group">
-            Team
-            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-red-600 transition-all duration-300 group-hover:w-full"></span>
-          </a>
-        </div>
-
-        <button className="bg-black text-white px-3 py-2 sm:px-4 sm:py-2.5 lg:px-6 lg:py-3 text-xs sm:text-sm hover:bg-gray-800 transition-all duration-300 flex items-center gap-1.5 lg:gap-2 hover:scale-105 hover:shadow-lg group">
-          <span className="hidden sm:inline">Pitch Your Idea</span>
-          <span className="sm:hidden">Pitch</span>
-          <span className="text-xs transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1">↗</span>
-        </button>
-      </nav>
-
+      <Header />
+      
       {/* Hero Section */}
       <section className="relative min-h-screen bg-[linear-gradient(to_top,rgba(255,253,247,0.3)_20%,rgba(239,197,177,0.3)_69%,rgba(166,79,0,0.3)_100%)] overflow-hidden">
         {/* Grid Pattern Background */}
@@ -142,7 +117,6 @@ export default function Home() {
             `,
             backgroundSize: '60px 60px'
           }}></div>
-          {/* Radial gradient overlay to fade grid towards center */}
           <div className="absolute inset-0 bg-gradient-to-r from-[rgba(255,253,247,0.4)] via-transparent to-[rgba(255,253,247,0.4)]"></div>
           <div className="absolute inset-0 bg-gradient-to-b from-[rgba(255,253,247,0.4)] via-transparent to-[rgba(255,253,247,0.6)]"></div>
         </div>
@@ -189,14 +163,14 @@ export default function Home() {
               animationStage >= 3 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`}>
             {/* Hero Title with responsive sizing */}
-            <h1 className="text-[#A90000] text-2xl xs:text-3xl sm:text-4xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-medium tracking-[2px] xs:tracking-[3px] sm:tracking-[4px] md:tracking-[6px] lg:tracking-[8px] xl:tracking-[10px] 2xl:tracking-[12px] leading-tight">
+            <h1 className="text-[#A90000] text-3xl xs:text-4xl sm:text-5xl md:text-5xl lg:text-6xl xl:text-5xl 2xl:text-6xl font-medium tracking-[2px] xs:tracking-[3px] sm:tracking-[4px] md:tracking-[6px] lg:tracking-[8px] xl:tracking-[10px] 2xl:tracking-[12px] leading-tight -mt-8 sm:-mt-12 md:-mt-16 lg:-mt-35">
               {/* Mobile-optimized line breaks for better readability */}
               <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-0">
-                <span className={`inline-block transition-all duration-500 delay-0 ${animationStage >= 3 ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-6 scale-95'}`}>BOLD</span>
-                <span className={`hidden sm:inline-block mx-3 md:mx-4 lg:mx-5 transition-all duration-500 delay-150 ${animationStage >= 3 ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-6 scale-95'}`}>•</span>
-                <span className={`inline-block transition-all duration-500 delay-300 ${animationStage >= 3 ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-6 scale-95'}`}>CONVICTION</span>
-                <span className={`hidden sm:inline-block mx-3 md:mx-4 lg:mx-5 transition-all duration-500 delay-450 ${animationStage >= 3 ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-6 scale-95'}`}>•</span>
-                <span className={`inline-block transition-all duration-500 delay-600 ${animationStage >= 3 ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-6 scale-95'}`}>GRIT</span>
+              <span className={`inline-block transition-all duration-500 delay-0 ${animationStage >= 3 ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-6 scale-95'}`}>BELIEVE</span>
+              <span className={`hidden sm:inline-block mx-3 md:mx-4 lg:mx-5 transition-all duration-500 delay-150 ${animationStage >= 3 ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-6 scale-95'}`}>•</span>
+              <span className={`inline-block transition-all duration-500 delay-300 ${animationStage >= 3 ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-6 scale-95'}`}>CONVICTION</span>
+              <span className={`hidden sm:inline-block mx-3 md:mx-4 lg:mx-5 transition-all duration-500 delay-450 ${animationStage >= 3 ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-6 scale-95'}`}>•</span>
+              <span className={`inline-block transition-all duration-500 delay-600 ${animationStage >= 3 ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-6 scale-95'}`}>GRIT</span>
               </div>
             </h1>
             
@@ -204,7 +178,7 @@ export default function Home() {
             <p className={`text-gray-600 text-sm sm:text-base md:text-md lg:text-lg xl:text-xl mt-0 sm:mt-0 md:mt-0 lg:mt-0 font-light tracking-wide max-w-3xl mx-auto leading-relaxed transition-all duration-800 delay-800 ${
               animationStage >= 3 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'
             }`}>
-              Investing in the Future of Deep Tech & AI
+              Investing in the Future of Deep Tech, Climate Tech & AI
             </p>
             </div>
         </div>
@@ -220,7 +194,7 @@ export default function Home() {
               <p className={`text-gray-500 text-sm sm:text-base lg:text-md 2xl:text-lg leading-relaxed transition-all duration-800 delay-200 ${
                 animationStage >= 4 ? 'opacity-100  translate-x-0' : 'opacity-0 -translate-x-4'
               }`}>
-                At Shastra VC, we back bold founders in deeptech and AI—where belief drives momentum before proof does, and early conviction fuels those shaping what tomorrow looks like.
+                At Shastra, we back founders in deep tech, climate tech, and AI, at a stage where belief comes before proof, and conviction fuels those shaping what tomorrow looks like. We partner early, when vision matters more than metrics, and direction still outweighs validation
               </p>
 
               <button className={`bg-[#A90000] text-white px-4 py-2.5 sm:px-6 sm:py-3 lg:px-8 lg:py-4 text-sm sm:text-base hover:bg-red-700 transition-all duration-300 flex items-center gap-2 hover:scale-105 hover:shadow-lg group ${
@@ -237,7 +211,7 @@ export default function Home() {
             }`}>
               {/* Stats Row */}
               <div className="flex flex-col sm:flex-row gap-6 sm:gap-4 md:gap-6 lg:gap-8 xl:gap-10 items-center lg:items-start justify-center lg:justify-start">
-                <div className="relative flex flex-col justify-center">
+                <div className="relative  flex flex-col justify-center">
                   {/* Individual line for first stat */}
                   <div className="relative w-16 h-[1px] bg-gray-300 mb-4 overflow-hidden mx-auto">
                     <div className={`absolute top-0 left-0 h-full bg-gray-300 transition-all duration-1000 delay-800 ${
@@ -248,8 +222,8 @@ export default function Home() {
                     }`}></div>
                   </div>
                   <StatCard 
-                    number="12+" 
-                    label="Portfolio Uprounds" 
+                    number="$75M+" 
+                    label="Assets Under Management" 
                     delay="1300ms"
                     isVisible={animationStage >= 4}
                   />
@@ -266,8 +240,8 @@ export default function Home() {
                     }`}></div>
                   </div>
                   <StatCard 
-                    number="$60M" 
-                    label="Capital Committed" 
+                    number="35+" 
+                    label="Startups Invested" 
                     delay="1400ms"
                     isVisible={animationStage >= 4}
                   />
@@ -284,8 +258,8 @@ export default function Home() {
                     }`}></div>
                   </div>
                   <StatCard 
-                    number="41+" 
-                    label="Startups Invested" 
+                    number="$600M+" 
+                    label="Market Cap" 
                     delay="1500ms"
                     isVisible={animationStage >= 4}
                   />
@@ -297,25 +271,15 @@ export default function Home() {
         </div>
       </section>
       
-      {/* Success Stories Section */}
-      
-      <SuccessStories />
       <FundingGlance />
-      <OurApproach /> 
       <WhyShastraVC />
-      <OurFocus/>
-
+      <OurFocus />
+      <Founders />
+      <OurApproach /> 
+      <NewsHighlights></NewsHighlights>
       
       {/* Footer */}
-      <footer className={`bg-[#FFFDF7] text-center py-6 sm:py-8 transition-all duration-1000 ease-out ${
-        animationStage >= 4 ? 'opacity-100' : 'opacity-0'
-      }`} style={{ transitionDelay: '2000ms' }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-20">
-          <p className="text-gray-600 text-xs sm:text-sm">
-            © 2025 Shastra VC. All rights reserved. Designed and Developed by {"Shahid"}
-          </p>
-        </div>
-      </footer>
+      <Footer></Footer>
     </div>
     
   );

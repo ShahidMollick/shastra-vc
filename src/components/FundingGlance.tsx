@@ -19,45 +19,33 @@ const FundingGlance: React.FC = () => {
   // Refs for intersection observer
   const sectionRef = useRef<HTMLElement>(null);
 
-  // Updated funding metrics with numeric values for counting
+  // Updated funding metrics with the new 4 metrics
   const fundingMetrics: FundingMetric[] = [
     {
-      label: "Total Capital Size",
-      value: 60,
-      prefix: "$",
-      suffix: "M",
-      gridArea: "tcs",
-    },
-    {
-      label: "Startups Invested",
-      value: 35,
-      plus: true,
-      gridArea: "si",
-    },
-    {
-      label: "Patent Startups",
-      value: 18,
+      label: "Patents filed by our portfolio",
+      value: 14,
       plus: true,
       gridArea: "psi",
     },
     {
-      label: "Avg Ticket Size",
-      value: 1.2,
+      label: "Non-dilutive grants raised",
+      value: 10,
       prefix: "$",
       suffix: "M",
-      gridArea: "ts",
+      plus: true,
+      gridArea: "rig",
     },
     {
-      label: "Success Rate",
-      value: 78,
-      suffix: "%",
-      gridArea: "sr",
+      label: "Global best-in-class technologies",
+      value: 6,
+      plus: true,
+      gridArea: "gbt",
     },
     {
-      label: "Active Industries",
+      label: "PhD Scholars as Founding Team",
       value: 12,
       plus: true,
-      gridArea: "pi",
+      gridArea: "psf",
     },
   ];
 
@@ -225,7 +213,7 @@ const FundingGlance: React.FC = () => {
             <div className="flex items-center">
               <div className="w-16 h-px bg-gray-300"></div>
               <span className="text-gray-500 text-xs font-light tracking-[0.25em] uppercase px-4">
-                Funding at a Glance
+                Portfolio at a Glance
               </span>
               <div className="w-16 h-px bg-gray-300"></div>
             </div>
@@ -254,7 +242,7 @@ const FundingGlance: React.FC = () => {
               }`}
               style={{ transitionDelay: "400ms" }}
             >
-              With $60M in capital, we’ve fueled 35+ startups, led 24+ rounds, and invested $200K-$3M in pre-seed to Series A ventures, driving patents and professor-led innovation.
+             With over $75 million in capital deployed, we’ve backed 35+ startups that are building breakthrough, science-led innovations, many of which are redefining global standards in technology
             </p>
             
             {/* Button with "pitch to us" style but outlined */}
@@ -304,9 +292,11 @@ const FundingGlance: React.FC = () => {
       <style jsx>{`
         .metrics-container {
           display: grid;
-          grid-template-columns: repeat(3, 1fr);
+          grid-template-columns: repeat(2, 1fr);
           gap: 0;
           position: relative;
+          max-width: 600px;
+    margin: 0 auto;
         }
 
         .metric-animate {
@@ -350,7 +340,7 @@ const FundingGlance: React.FC = () => {
         }
 
         .metric-value {
-          font-size: 56px;
+          font-size: 72px;
           line-height: 1;
           font-weight: 200;
           color: #a90000;
