@@ -24,3 +24,67 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Success Stories Animations */
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll {
+  animation: scroll 30s linear infinite;
+}
+
+.animate-scroll:hover {
+  animation-play-state: paused;
+}
+
+.animate-scroll-paused {
+  animation: scroll 30s linear infinite;
+  animation-play-state: paused;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Smooth scrolling for horizontal scroll */
+.scroll-smooth {
+  scroll-behavior: smooth;
+}
+
+/* Custom hover effects */
+.group:hover .animate-scroll {
+  animation-play-state: paused;
+}
+
+/* Enhanced grayscale and scale effects */
+.grayscale {
+  filter: grayscale(100%);
+}
+
+.grayscale-0 {
+  filter: grayscale(0%);
+}
+
+/* Responsive grid adjustments */
+@media (max-width: 640px) {
+  .animate-scroll, .animate-scroll-paused {
+    animation-duration: 20s;
+  }
+}
+
+@media (min-width: 1024px) {
+  .animate-scroll, .animate-scroll-paused {
+    animation-duration: 40s;
+  }
+}
