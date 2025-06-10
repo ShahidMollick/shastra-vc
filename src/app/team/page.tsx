@@ -41,8 +41,10 @@ const TeamPage: React.FC = () => {
     }
 
     return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
+      // Store a reference to prevent stale closures
+      const currentRef = sectionRef.current;
+      if (currentRef) {
+        observer.unobserve(currentRef);
       }
     };
   }, [animationStage]);
@@ -112,7 +114,7 @@ const TeamPage: React.FC = () => {
                 animate={animationStage >= 1 ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                 transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
               >
-                A diverse collective of operators, founders, and investors united by our shared conviction in backing bold ideas that shape tomorrow's economy.
+                A diverse collective of operators, founders, and investors united by our shared conviction in backing bold ideas that shape tomorrow&apos;s economy.
               </motion.p>
             </div>
           </div>
@@ -141,45 +143,7 @@ const TeamPage: React.FC = () => {
           </div>
         </section>
 
-        {/* Contact Section */}
-        <section className="relative py-20 sm:py-24 lg:py-32 bg-gray-50/30">
-          <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={animationStage >= 3 ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ duration: 0.8, delay: 1.2 }}
-            >
-              {/* Separator Line */}
-              <div className="flex items-center justify-center mb-12">
-                <div className="w-24 h-px bg-[#A90000]"></div>
-              </div>
-
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light tracking-tight leading-tight text-black mb-6">
-                Ready to work with us?
-              </h2>
-              
-              <p className="text-gray-600 text-lg leading-relaxed font-light mb-12 max-w-2xl mx-auto">
-                If you're building something extraordinary, we'd love to hear from you.
-              </p>
-
-              <motion.a
-                href="/contact"
-                className="inline-flex items-center group border border-black text-black px-8 py-4 text-sm font-light tracking-wide hover:bg-black hover:text-white transition-all duration-300"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <span>Get In Touch</span>
-                <motion.span 
-                  className="ml-3 text-xs"
-                  whileHover={{ x: 2, y: -2 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  ↗
-                </motion.span>
-              </motion.a>
-            </motion.div>
-          </div>
-        </section>
+       <Footer></Footer>
       </main>
 
       {/* Team Member Modal */}
@@ -202,7 +166,7 @@ const TeamMemberCard: React.FC<{
   onHover: (id: number | null) => void;
   isHovered: boolean;
   onClick: () => void;
-}> = ({ member, index, onHover, isHovered, onClick }) => {
+}> = ({ member, index, onHover, onClick }) => {
   const [isCardHovered, setIsCardHovered] = useState(false);
 
   return (
@@ -457,10 +421,10 @@ const TeamMemberModal: React.FC<{
               )}
             </div>
           </div>
-          <Footer></Footer>
         </div>
       </motion.div>
     </motion.div>
+    
   );
 };
 

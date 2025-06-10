@@ -319,7 +319,7 @@ const SuccessStories: React.FC = () => {
             }`}
           >
             {/* First set of stories */}
-            {successStories.map((story, index) => (
+            {successStories.map((story) => (
               <div
                 key={`story-${story.id}`}
                 className="story-animate relative flex-shrink-0 w-64 sm:w-80 lg:w-96 xl:w-[26rem] mx-1 sm:mx-2 lg:mx-3 group cursor-pointer opacity-0 translate-y-8 scale-95"
@@ -371,7 +371,7 @@ const SuccessStories: React.FC = () => {
             ))}
 
             {/* Duplicate set for seamless infinite scroll */}
-            {successStories.map((story, index) => (
+            {successStories.map((story) => (
               <div
                 key={`story-duplicate-${story.id}`}
                 className="story-animate relative flex-shrink-0 w-64 sm:w-80 lg:w-96 xl:w-[26rem] mx-1 sm:mx-2 lg:mx-3 group cursor-pointer opacity-0 translate-y-8 scale-95"
@@ -419,7 +419,7 @@ const SuccessStories: React.FC = () => {
             ))}
 
             {/* Third set for extra smoothness */}
-            {successStories.map((story, index) => (
+            {successStories.map((story) => (
               <div
                 key={`story-triple-${story.id}`}
                 className="story-animate relative flex-shrink-0 w-64 sm:w-80 lg:w-96 xl:w-[26rem] mx-1 sm:mx-2 lg:mx-3 group cursor-pointer opacity-0 translate-y-8 scale-95"

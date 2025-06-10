@@ -45,8 +45,10 @@ const Founders: React.FC = () => {
     }
 
     return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
+      // Store a reference to prevent stale closures
+      const currentRef = sectionRef.current;
+      if (currentRef) {
+        observer.unobserve(currentRef);
       }
     };
   }, [animationStage]);
@@ -173,7 +175,7 @@ const Founders: React.FC = () => {
             animate={animationStage >= 1 ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
           >
-            We're a diverse, hands-on team of operators, founders, and investors backing bold ideas with smart capital. If you're building something interesting, we'd love to hear from you.
+            We&apos;re a diverse, hands-on team of operators, founders, and investors backing bold ideas with smart capital. If you&apos;re building something interesting, we&apos;d love to hear from you.
           </motion.p>
 
           {/* CTA Section */}
@@ -283,7 +285,7 @@ const Founders: React.FC = () => {
                   key={`${member.id}-${index}`}
                   member={member}
                   index={index}
-                  onHover={setHoveredCard}
+                  onHovered={setHoveredCard}
                   isHovered={hoveredCard === member.id}
                 />
               ))}
@@ -330,20 +332,20 @@ const Founders: React.FC = () => {
 const TeamCard: React.FC<{ 
   member: TeamMember; 
   index: number;
-  onHover: (id: number | null) => void;
+  onHovered: (id: number | null) => void;
   isHovered: boolean;
-}> = ({ member, index, onHover, isHovered }) => {
+}> = ({ member, index, onHovered }) => {
   const [isCardHovered, setIsCardHovered] = useState(false);
 
   return (
     <motion.div
       className="team-card flex-shrink-0 w-72 sm:w-80 lg:w-96"
       onHoverStart={() => {
-        onHover(member.id);
+        onHovered(member.id);
         setIsCardHovered(true);
       }}
       onHoverEnd={() => {
-        onHover(null);
+        onHovered(null);
         setIsCardHovered(false);
       }}
       initial={{ opacity: 0, y: 30, scale: 0.95 }}

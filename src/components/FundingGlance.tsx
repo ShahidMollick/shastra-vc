@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useMemo } from "react";
 
 interface FundingMetric {
   label: string;
@@ -15,12 +15,13 @@ const FundingGlance: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [animationStage, setAnimationStage] = useState(0);
   const [metricCounts, setMetricCounts] = useState<{ [key: string]: number }>({});
+  const [hasAnimated, setHasAnimated] = useState(false);
 
   // Refs for intersection observer
   const sectionRef = useRef<HTMLElement>(null);
 
-  // Updated funding metrics with the new 4 metrics
-  const fundingMetrics: FundingMetric[] = [
+  // Memoize funding metrics to prevent re-creation on every render
+  const fundingMetrics: FundingMetric[] = useMemo(() => [
     {
       label: "Patents filed by our portfolio",
       value: 14,
@@ -47,7 +48,7 @@ const FundingGlance: React.FC = () => {
       plus: true,
       gridArea: "psf",
     },
-  ];
+  ], []);
 
   // Optimized number counting animation function
   const animateCount = (
@@ -106,42 +107,49 @@ const FundingGlance: React.FC = () => {
             setAnimationStage(0);
             setIsVisible(false);
             setMetricCounts({});
+            setHasAnimated(false);
           }
         }
       });
     }, observerOptions);
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
+    const currentRef = sectionRef.current;
+    if (currentRef) {
+      observer.observe(currentRef);
     }
 
     return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
+      if (currentRef) {
+        observer.unobserve(currentRef);
       }
     };
   }, [animationStage]);
 
-  // Metrics animation
+  // Metrics animation - removed fundingMetrics from dependency array
   useEffect(() => {
-    if (animationStage >= 2) {
+    if (animationStage >= 2 && !hasAnimated) {
+      setHasAnimated(true);
+      
       const metricElements = document.querySelectorAll(".metric-animate");
       metricElements.forEach((element) => {
         element.classList.add("animate-in");
       });
 
-      fundingMetrics.forEach((metric) => {
+      fundingMetrics.forEach((metric, index) => {
         const duration = 2000;
+        const delay = index * 200; // Stagger animations
 
-        animateCount(0, metric.value, duration, (currentValue) => {
-          setMetricCounts((prev) => ({
-            ...prev,
-            [metric.gridArea!]: currentValue,
-          }));
-        });
+        setTimeout(() => {
+          animateCount(0, metric.value, duration, (currentValue) => {
+            setMetricCounts((prev) => ({
+              ...prev,
+              [metric.gridArea!]: currentValue,
+            }));
+          });
+        }, delay);
       });
     }
-  }, [animationStage]);
+  }, [animationStage, hasAnimated, fundingMetrics]);
 
   const formatMetricValue = (metric: FundingMetric, currentCount?: number) => {
     const value = currentCount !== undefined ? currentCount : metric.value;
@@ -242,7 +250,7 @@ const FundingGlance: React.FC = () => {
               }`}
               style={{ transitionDelay: "400ms" }}
             >
-             With over $75 million in capital deployed, we’ve backed 35+ startups that are building breakthrough, science-led innovations, many of which are redefining global standards in technology
+             With over $75 million in capital deployed, we&apos;ve backed 35+ startups that are building breakthrough, science-led innovations, many of which are redefining global standards in technology
             </p>
             
             {/* Button with "pitch to us" style but outlined */}
@@ -262,11 +270,9 @@ const FundingGlance: React.FC = () => {
               animationStage >= 2 ? "opacity-100" : "opacity-0"
             }`}
           >
-          
-
             {/* Metrics grid with consistent sizing */}
             <div className="metrics-container mb-16 mt-16">
-              {fundingMetrics.map((metric, index) => (
+              {fundingMetrics.map((metric) => (
                 <div
                   key={metric.gridArea}
                   className="metric-animate opacity-0 translate-y-8"
@@ -283,8 +289,6 @@ const FundingGlance: React.FC = () => {
                 </div>
               ))}
             </div>
-
-  
           </div>
         </div>
       </div>
@@ -296,7 +300,7 @@ const FundingGlance: React.FC = () => {
           gap: 0;
           position: relative;
           max-width: 600px;
-    margin: 0 auto;
+          margin: 0 auto;
         }
 
         .metric-animate {

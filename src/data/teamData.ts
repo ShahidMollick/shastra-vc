@@ -19,7 +19,7 @@ export const teamData: TeamMember[] = [
     title: "Managing Partner",
     image: "/founder-1.png",
     bio: "Vasant oversees venture partnerships, fundraising, and overall operations at Shastra VC, while also leading the firm's investments in DeepTech, FrontierTech, Enterprise SaaS, and the Creator Ecosystem. Before Shastra, Vasant was a serial entrepreneur with successful exits from Autoninja (acquired by ICICI Lombard) and Bumper.com, and also played key roles at Prisma Global. Over the years, he has worn many hats—founder, consultant, and angel investor—bringing a versatile perspective to venture building.",
-    linkedin: "https://www.linkedin.com/in/vasantrao02/",
+    linkedin: "https://www.linkedin.com/in/vasantraoo/",
     email: "vasant@shastra.vc",
     achievements: [
       // "Serial entrepreneur with successful exits",
@@ -76,7 +76,7 @@ export const teamData: TeamMember[] = [
     title: "Compliance and Portfolio Management",
     image: "/founder-5.png",
     bio: "Pratiti manages Shastra VC's internal and external compliance, investor relations, and portfolio management. She plays a pivotal role in facilitating communication between startup founders, fund partners, and investors, ensuring smooth collaboration and growth across the board. A graduate in Finance and a post-graduate in Mass Communication from Symbiosis Institute of Media and Communication (SIMC, Pune), Pratiti began her career in journalism as a Senior News Producer and financial content writer at CNBC-TV18 (CNN-IBN).",
-    linkedin: "https://www.linkedin.com/in/pratiti-chakraborty-5596387/",
+    linkedin: "https://www.linkedin.com/in/pratiti-chakraborty-5989ab15",
     email: "pratiti@shastra.vc",
     achievements: [
       // "Graduate in Finance and post-graduate in Mass Communication",
@@ -114,7 +114,7 @@ export const teamData: TeamMember[] = [
     title: "Founding Partner",
     image: "/founder-3.png",
     bio: "Ashis drives portfolio management and ecosystem partnerships at Shastra VC, while also leading the firm's investments across Marketplaces, B2B Commerce, ClimateTech, and Enterprise/SMB SaaS. An alumnus of NIT Calicut and IIM Bangalore, Ashis began his career with global technology leaders like Intel and NetApp, and later held leadership positions at companies like Birla. He went on to co-found Autoninja, a SaaS startup that was successfully acquired by ICICI Lombard, marking a significant milestone in his entrepreneurial journey.",
-    linkedin: "https://www.linkedin.com/in/ashis-nayak-31b6a91/",
+    linkedin: "https://www.linkedin.com/in/ashis-nayak-91b6b915/",
     email: "ashis@shastra.vc",
     achievements: [
       // "NIT Calicut and IIM Bangalore alumnus",

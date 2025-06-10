@@ -24,13 +24,13 @@ const WhyShastraVC: React.FC = () => {
       id: 1,
       title: "Founder First",
       subtitle: "Been There, Done That",
-      description: "We've been in your shoes. We know how tough the early days can be. That's exactly why we built Shastra to help you avoid common pitfalls, offer honest feedback, and open up a network we've built over years of building, and backing companies."
+      description: "We&apos;ve been in your shoes. We know how tough the early days can be. That&apos;s exactly why we built Shastra to help you avoid common pitfalls, offer honest feedback, and open up a network we&apos;ve built over years of building, and backing companies."
     },
     {
       id: 2,
       title: "Active",
       subtitle: "Beyond Board Meetings",
-      description: "We don't just show up at board meetings, we show up when it truly matters. Whether it's a midnight call across time zones, a GTM crisis, or a last-minute deck before your next round, we are there rolling up our sleeves."
+      description: "We don&apos;t just show up at board meetings, we show up when it truly matters. Whether it&apos;s a midnight call across time zones, a GTM crisis, or a last-minute deck before your next round, we are there rolling up our sleeves."
     },
     {
       id: 3,
@@ -68,13 +68,14 @@ const WhyShastraVC: React.FC = () => {
       });
     }, observerOptions);
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
+    const currentRef = sectionRef.current;
+    if (currentRef) {
+      observer.observe(currentRef);
     }
 
     return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
+      if (currentRef) {
+        observer.unobserve(currentRef);
       }
     };
   }, [animationStage]);
@@ -134,7 +135,7 @@ const WhyShastraVC: React.FC = () => {
             animate={animationStage >= 1 ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
           >
-            We believe in working as true partners, bringing domain expertise, long-term conviction, and an operator's mindset to support founders building transformative deeptech, climate tech and AI companies
+            We believe in working as true partners, bringing domain expertise, long-term conviction, and an operators mindset to support founders building transformative deeptech, climate tech and AI companies
           </motion.p>
         </div>
 
@@ -147,7 +148,7 @@ const WhyShastraVC: React.FC = () => {
               index={index}
               isVisible={animationStage >= 2}
               onHover={setHoveredItem}
-              isHovered={hoveredItem === point.id}
+              hoveredItem={hoveredItem}
             />
           ))}
         </div>
@@ -172,9 +173,10 @@ const DNAItem: React.FC<{
   index: number;
   isVisible: boolean;
   onHover: (id: number | null) => void;
-  isHovered: boolean;
-}> = ({ point, index, isVisible, onHover, isHovered }) => {
+  hoveredItem: number | null;
+}> = ({ point, index, isVisible, onHover, hoveredItem }) => {
   const [isItemHovered, setIsItemHovered] = useState(false);
+  const isHovered = hoveredItem === point.id;
 
   return (
     <motion.div
@@ -285,7 +287,7 @@ const DNAItem: React.FC<{
         <motion.div 
           className="absolute inset-0 border-l-2 border-transparent pointer-events-none"
           animate={{ 
-            borderLeftColor: isItemHovered ? '#A90000' : 'transparent' 
+            borderLeftColor: isHovered ? '#A90000' : 'transparent' 
           }}
           transition={{ duration: 0.3 }}
         />

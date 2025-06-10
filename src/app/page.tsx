@@ -1,8 +1,6 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useState } from "react";
-import SuccessStories from "@/components/SuccessStories";
 import FundingGlance from '../components/FundingGlance';
 import NewsHighlights from "@/components/NewsHighlights";
 import OurApproach from '../components/OurApproach';

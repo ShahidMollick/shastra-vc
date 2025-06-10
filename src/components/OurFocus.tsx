@@ -29,7 +29,7 @@ const OurFocus: React.FC = () => {
       shortDescription:
         "Space Tech, Aerospace & Defence Tech, Semiconductors, BioTech, Quantum Computing, Nanotechnology",
       detailedContent:
-        "India's space sector alone is projected to reach $44B by 2033, while defense, biotech, and semiconductors are seeing renewed national focus. Frontier fields like quantum computing, nanotechnology, cybersecurity, advanced materials, and robotics are moving from lab to market with increasing velocity. These are not just technical disciplines—they are strategic domains that define national capability and global competitiveness.",
+        "India&apos;s space sector alone is projected to reach $44B by 2033, while defense, biotech, and semiconductors are seeing renewed national focus. Frontier fields like quantum computing, nanotechnology, cybersecurity, advanced materials, and robotics are moving from lab to market with increasing velocity. These are not just technical disciplines—they are strategic domains that define national capability and global competitiveness.",
       source:
         "https://www.pib.gov.in/PressReleasePage.aspx?PRID=2068155#:~:text=At%20present%2C%20the%20Indian%20space,the%20space%20economy%20in%20India.",
     },
@@ -40,7 +40,7 @@ const OurFocus: React.FC = () => {
       shortDescription:
         "We invest in foundational technologies that push the frontier of science and engineering, including, Space Technology, Aerospace & Defence Systems, Semiconductors, Biotechnology, Quantum Computing, Nanotechnology",
       detailedContent:
-        "India is projected to become the world's third-largest energy consumer by 2030, and with that comes an urgent need to decarbonize across energy, industry, mobility, and agriculture. Climatetech now spans everything from battery innovation and green hydrogen to climate-resilient agri-solutions and circular materials. The transition isn't optional—it's a trillion-dollar shift in how we power and preserve life. Founders working at this intersection of sustainability and scale have never been more critical.",
+        "India is projected to become the world&apos;s third-largest energy consumer by 2030, and with that comes an urgent need to decarbonize across energy, industry, mobility, and agriculture. Climatetech now spans everything from battery innovation and green hydrogen to climate-resilient agri-solutions and circular materials. The transition isn&apos;t optional—it&apos;s a trillion-dollar shift in how we power and preserve life. Founders working at this intersection of sustainability and scale have never been more critical.",
     },
     {
       id: 3,
@@ -70,19 +70,24 @@ const OurFocus: React.FC = () => {
       }
     );
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
+    const currentRef = sectionRef.current;
+    if (currentRef) {
+      observer.observe(currentRef);
     }
 
     return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
+      if (currentRef) {
+        observer.unobserve(currentRef);
       }
     };
   }, []);
 
   const closeModal = () => {
     setSelectedArea(null);
+  };
+
+  const handleSlideChange = (index: number) => {
+    setActiveSlide(index);
   };
 
   return (
@@ -154,11 +159,11 @@ const OurFocus: React.FC = () => {
                 style={{ transitionDelay: "200ms" }}
               >
                 <p className="text-gray-600 text-lg leading-relaxed text-right font-light">
-                  We back founders tackling humanity's most complex
+                  We back founders tackling humanity&apos;s most complex
                   challenges where breakthrough science meets scalable
                   solutions. From space technology to
-                  climate resilience and AI-native software, these aren't just
-                  investment themes; they're the building blocks of tomorrow's
+                  climate resilience and AI-native software, these aren&apos;t just
+                  investment themes; they&apos;re the building blocks of tomorrow&apos;s
                   economy.
                 </p>
               </div>
@@ -241,7 +246,7 @@ const OurFocus: React.FC = () => {
                     ? "bg-[#A90000] scale-125"
                     : "bg-gray-300 hover:bg-gray-400"
                 }`}
-                // onClick={() => setActiveSlide(index)}
+                onClick={() => handleSlideChange(index)}
                 aria-label={`Go to slide ${index + 1}`}
               ></button>
             ))}

@@ -10,7 +10,7 @@ interface Founder {
   avatar?: string;
 }
 
-interface Company {
+interface PortfolioCompany {
   id: number;
   name: string;
   logo: string;
@@ -24,352 +24,350 @@ interface Company {
 }
 
 const Portfolio: React.FC = () => {
-  const [isVisible, setIsVisible] = useState(false);
   const [animationStage, setAnimationStage] = useState(0);
   const [selectedFilter, setSelectedFilter] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
   const [hoveredCompany, setHoveredCompany] = useState<number | null>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
 
-  const companies: Company[] = [
-  {
-    id: 1,
-    name: "Likeminds",
-    logo: "/likeminds.png",
-    description: "Low-code in-app community builder enabling brands to launch customer communities in under 15 minutes",
-    sector: "SaaS (D2C)",
-    investedAt: "Pre-Seed",
-    currentStage: "Pre-Seed",
-    website: "https://www.likeminds.community/",
-    founders: [],
-    coinvestors: ["GTM Ventures", "Anupam Mittal"]
-  },
-  {
-    id: 2,
-    name: "Klaar",
-    logo: "/klaar.png",
-    description: "AI-powered HR SaaS replacing Excel-driven OKRs, 360 feedback, and talent planning for enterprises.",
-    sector: "SaaS (AI/ML)",
-    investedAt: "Pre-Seed",
-    currentStage: "Series A",
-    website: "https://www.klaarhq.com/",
-    founders: [],
-    coinvestors: ["Prime", "DeVC"]
-  },
-  {
-    id: 3,
-    name: "Inspecity",
-    logo: "/inspecity.png",
-    description: "Building satellite servicing vehicle for refueling, deorbiting, and life extension, with propulsion tech validated by ISRO.",
-    sector: "Deeptech (Space & Defence)",
-    investedAt: "Seed",
-    currentStage: "Series A",
-    website: "https://www.inspecity.com/#hero",
-    founders: [],
-    coinvestors: ["Lucky Investment Managers", "Speciale Invest", "Antler"]
-  },
-  {
-    id: 4,
-    name: "Simplismart",
-    logo: "/simplismart.png",
-    description: "One-stop ML Ops infra platform with world's fastest AI inference engine, reducing compute costs by 80% and latency by 3x",
-    sector: "SaaS (AI/ML)",
-    investedAt: "Pre-Seed",
-    currentStage: "Series A",
-    website: "https://www.simplismart.ai/",
-    founders: [],
-    coinvestors: ["Accel"]
-  },
-  {
-    id: 5,
-    name: "Xindus",
-    logo: "/xindus.png",
-    description: "India's B2B Shopify for exporters, solving logistics and trade compliance for SME manufacturers",
-    sector: "B2B Logistics",
-    investedAt: "Seed",
-    currentStage: "Seed",
-    website: "https://www.xindus.net/",
-    founders: [],
-    coinvestors: ["3one4 capital", "Orios Venture Partners"]
-  },
-  {
-    id: 6,
-    name: "Alltius",
-    logo: "/alltius.png",
-    description: "Developing a conversational AI tool for SaaS enablement that offers interactive and personalized guidance using proprietary LLM trained on SaaS companies' data",
-    sector: "SaaS (AI/ML)",
-    investedAt: "Seed",
-    currentStage: "Seed",
-    website: "https://www.alltius.ai/",
-    founders: [],
-    coinvestors: ["Stellaris", "Blume"]
-  },
-  {
-    id: 7,
-    name: "Kloudlite",
-    logo: "/kloudlite.png",
-    description: "Cloud agnostic single console for the developers to manage their DevTools and Dev Infra",
-    sector: "DevOps",
-    investedAt: "Seed",
-    currentStage: "Seed",
-    website: "https://kloudlite.io/",
-    founders: [],
-    coinvestors: ["Capital 2B"]
-  },
-  {
-    id: 8,
-    name: "Lodestone",
-    logo: "/lodestone.png",
-    description: "Tech-driven omni-channel maternal healthcare company",
-    sector: "Consumer Healthtech",
-    investedAt: "Seed",
-    currentStage: "Seed",
-    website: "",
-    founders: [],
-    coinvestors: ["Eight Roads", "Kae Capital"]
-  },
-  {
-    id: 9,
-    name: "Knowl",
-    logo: "/knowl.png",
-    description: "AI agents for debt collection in BFSI",
-    sector: "AI/ML Software",
-    investedAt: "Seed",
-    currentStage: "Seed",
-    website: "https://www.knowl.ai/",
-    founders: [],
-    coinvestors: ["Capital 2B"]
-  },
-  {
-    id: 10,
-    name: "Molequle",
-    logo: "/molequle.png",
-    description: "B2B marketplace simplifying cross-border commerce in specialty chemicals",
-    sector: "B2B Marketplace",
-    investedAt: "Pre-Seed",
-    currentStage: "Pre-Seed",
-    website: "https://molequle.biz/",
-    founders: [],
-    coinvestors: ["First Cheque"]
-  },
-  {
-    id: 11,
-    name: "Devdham",
-    logo: "/devdarshan.png",
-    description: "Devotional platform for connecting the devotees with the temples; Group-pujas, e-darshan",
-    sector: "Consumer Religion",
-    investedAt: "Seed",
-    currentStage: "Seed",
-    website: "https://devdham.com/en-us",
-    founders: [],
-    coinvestors: ["Titan Capital", "All In Capital"]
-  },
-  {
-    id: 12,
-    name: "Flurn",
-    logo: "/flurn.png",
-    description: "Community-based offline ed-tech company, bringing 21st-century skills to children inside apartment complexes",
-    sector: "Consumer Education",
-    investedAt: "Seed",
-    currentStage: "Seed",
-    website: "https://flurn.in/",
-    founders: [],
-    coinvestors: ["Angels"]
-  },
-  {
-    id: 13,
-    name: "Covrzy",
-    logo: "/covrzy.png",
-    description: "Small ticket business insurance products for SMEs and startups; launched in deep partnerships with insurance companies",
-    sector: "",
-    investedAt: "Pre-Seed",
-    currentStage: "Pre-Seed",
-    website: "https://covrzy.com/",
-    founders: [],
-    coinvestors: ["Antler"]
-  },
-  {
-    id: 14,
-    name: "Mini Mines",
-    logo: "/minimines.png",
-    description: "Hybrid Hydrometallurgy Process that recycles lithium-ion batteries with >96% efficiency and purity",
-    sector: "Climatetech",
-    investedAt: "Pre-Seed",
-    currentStage: "Seed",
-    website: "https://m-mines.com/",
-    founders: [],
-    coinvestors: ["Beenext", "Axilor"]
-  },
-  {
-    id: 15,
-    name: "Truegradient",
-    logo: "/truegradient.png",
-    description: "No-code AI for demand forecasting helping brands improve sales and inventory efficiency by 20%",
-    sector: "SaaS (AI/ML)",
-    investedAt: "Pre-Seed",
-    currentStage: "Pre-Seed",
-    website: "https://truegradient.ai/",
-    founders: [],
-    coinvestors: ["Angels"]
-  },
-  {
-    id: 16,
-    name: "Swirl",
-    logo: "/swirl.png",
-    description: "No-code live commerce solution powering video shopping experiences for brands like LG, Vivo etc.",
-    sector: "SaaS (D2C)",
-    investedAt: "Seed",
-    currentStage: "Seed",
-    website: "https://www.goswirl.ai/",
-    founders: [],
-    coinvestors: ["Angels"]
-  },
-  {
-    id: 17,
-    name: "International Battery Company (IBC)",
-    logo: "/ibc.png",
-    description: "India’s first homegrown Li-ion cell manufacturer (NMC Cells), scaling from 50MWh to GWh factory",
-    sector: "Climatetech",
-    investedAt: "Seed",
-    currentStage: "Series A",
-    website: "https://ibcbatt.com/",
-    founders: [],
-    coinvestors: ["RTP Global", "Beenext"]
-  },
-  {
-    id: 18,
-    name: "Alt Carbon",
-    logo: "/altcarbon.png",
-    description: "Carbon Dioxide Removal using Enhanced Rock Weathering; world's cheapest ERW carbon credits",
-    sector: "Climatetech",
-    investedAt: "Pre-Seed",
-    currentStage: "Series A",
-    website: "https://www.alt-carbon.com/",
-    founders: [],
-    coinvestors: ["Lachy Groom Fund"]
-  },
-  {
-    id: 19,
-    name: "ZapScale",
-    logo: "/zapscale.png",
-    description: "AI-powered customer success platform helping B2B SaaS companies reduce churn and increase upsell",
-    sector: "SaaS (AI/ML)",
-    investedAt: "Seed",
-    currentStage: "Seed",
-    website: "https://www.zapscale.com/",
-    founders: [],
-    coinvestors: ["Blume Ventures"]
-  },
-  {
-    id: 20,
-    name: "SISIR Radar",
-    logo: "/sisir.png",
-    description: "World's highest-resolution L-band SAR developer; 35x better than NASA’s L-band SAR at 10% cost",
-    sector: "Deeptech (Space & Defence)",
-    investedAt: "Seed",
-    currentStage: "Series A",
-    website: "https://www.sisirradar.com/",
-    founders: [],
-    coinvestors: ["360One Asset"]
-  },
-  {
-    id: 21,
-    name: "Avammune Therapeutics",
-    logo: "/avammune.png",
-    description: "Immunotherapy drug discovery company with a leading molecule that received $320M+ term sheet",
-    sector: "Deeptech (Biotech)",
-    investedAt: "Series A",
-    currentStage: "Series A",
-    website: "https://www.avammune.com/",
-    founders: [],
-    coinvestors: ["Capital 2B", "Kotak Lifesciences"]
-  },
-  {
-    id: 22,
-    name: "Tractrix",
-    logo: "/tractrix.png",
-    description: "Manufactures complex electro optical systems like collimators, surveillance and missile navigation systems",
-    sector: "Deeptech (Space & Defence)",
-    investedAt: "Seed",
-    currentStage: "Seed",
-    website: "https://www.tractrix.in/",
-    founders: [],
-    coinvestors: ["Beenext"]
-  },
-  {
-    id: 23,
-    name: "Drizz",
-    logo: "/drizz.png",
-    description: "AI-powered mobile app testing, reducing automation setup time from weeks to days for clients like Rapido & Zepto",
-    sector: "SaaS (AI/ML)",
-    investedAt: "Seed",
-    currentStage: "Seed",
-    website: "https://www.drizz.dev/",
-    founders: [],
-    coinvestors: ["Stellaris"]
-  },
-  {
-    id: 24,
-    name: "Crest Wealth",
-    logo: "/crestwealth.png",
-    description: "Tech-enabled fractional family office managing wealth for founders and HNWIs",
-    sector: "Fintech (Wealth)",
-    investedAt: "Seed",
-    currentStage: "Seed",
-    website: "https://www.crestwealthmgmt.com/",
-    founders: [],
-    coinvestors: ["Beenext", "Sparrow"]
-  },
-  {
-    id: 25,
-    name: "Inamo",
-    logo: "/inamo.png",
-    description: "Tech-driven Q-commerce ops enabler, optimizing dark stores and last-mile delivery for Blinkit and Zepto",
-    sector: "B2B Services",
-    investedAt: "Seed",
-    currentStage: "Seed",
-    website: "https://www.inamo.in/",
-    founders: [],
-    coinvestors: ["Gemba Capital"]
-  },
-  {
-    id: 26,
-    name: "KhiladiPro",
-    logo: "/khiladipro.png",
-    description: "AI-powered sports tech platform helping athletes measure and optimize performance with data insights",
-    sector: "AI/ML Software",
-    investedAt: "Seed",
-    currentStage: "Seed",
-    website: "https://khiladipro.com/",
-    founders: [],
-    coinvestors: ["MGA Ventures"]
-  },
-  {
-    id: 27,
-    name: "Lokam",
-    logo: "/lokam.png",
-    description: "Trusted generic pharma retail chain offering alternatives that are 50% cheaper with 50%+ gross margins",
-    sector: "Consumer Pharma Retail",
-    investedAt: "Pre-Seed",
-    currentStage: "Pre-Seed",
-    website: "https://lokam.ai/",
-    founders: [],
-    coinvestors: ["Angels"]
-  },
-  {
-    id: 28,
-    name: "Sanlayan",
-    logo: "/sanlayan.png",
-    description: "Aerospace & Defence company acquiring niche defense MSMEs and scaling them into system integrators",
-    sector: "Deeptech (Space & Defence)",
-    investedAt: "Series A",
-    currentStage: "Series A",
-    website: "https://www.sanlayan.com/",
-    founders: [],
-    coinvestors: ["Jungle Ventures", "Lucky Investment Managers"]
-  }
-
-];
+  const companies: PortfolioCompany[] = [
+    {
+      id: 1,
+      name: "Likeminds",
+      logo: "/likeminds.png",
+      description: "Low-code in-app community builder enabling brands to launch customer communities in under 15 minutes",
+      sector: "Software (AI/ML)",
+      investedAt: "Pre-Seed",
+      currentStage: "Pre-Seed",
+      website: "https://www.likeminds.community/",
+      founders: [],
+      coinvestors: ["GTM Ventures", "Anupam Mittal"]
+    },
+    {
+      id: 2,
+      name: "Klaar",
+      logo: "/klaar.png",
+      description: "AI-powered HR SaaS replacing Excel-driven OKRs, 360 feedback, and talent planning for enterprises.",
+      sector: "Software (AI/ML)",
+      investedAt: "Pre-Seed",
+      currentStage: "Series A",
+      website: "https://www.klaarhq.com/",
+      founders: [],
+      coinvestors: ["DeVC"]
+    },
+    {
+      id: 3,
+      name: "Inspecity",
+      logo: "/inspecity.png",
+      description: "Building satellite servicing vehicle for refueling, deorbiting, and life extension, with propulsion tech validated by ISRO.",
+      sector: "Deeptech",
+      investedAt: "Seed",
+      currentStage: "Series A",
+      website: "https://www.inspecity.com/#hero",
+      founders: [],
+      coinvestors: ["Lucky Investment Managers", "Speciale Invest", "Antler"]
+    },
+    {
+      id: 4,
+      name: "Simplismart",
+      logo: "/simplismart.png",
+      description: "One-stop ML Ops infra platform with world&apos;s fastest AI inference engine, reducing compute costs by 80% and latency by 3x",
+      sector: "Software (AI/ML)",
+      investedAt: "Pre-Seed",
+      currentStage: "Series A",
+      website: "https://www.simplismart.ai/",
+      founders: [],
+      coinvestors: ["Accel"]
+    },
+    {
+      id: 5,
+      name: "Xindus",
+      logo: "/xindus.png",
+      description: "India's B2B Shopify for exporters, solving logistics and trade compliance for SME manufacturers",
+      sector: "Others",
+      investedAt: "Seed",
+      currentStage: "Seed",
+      website: "https://www.xindus.net/",
+      founders: [],
+      coinvestors: ["3one4 capital", "Orios Venture Partners"]
+    },
+    {
+      id: 6,
+      name: "Alltius",
+      logo: "/alltius.png",
+      description: "Developing a conversational AI tool for SaaS enablement that offers interactive and personalized guidance using proprietary LLM trained on SaaS companies&apos; data",
+      sector: "Software (AI/ML)",
+      investedAt: "Seed",
+      currentStage: "Seed",
+      website: "https://www.alltius.ai/",
+      founders: [],
+      coinvestors: ["Stellaris", "Blume"]
+    },
+    {
+      id: 7,
+      name: "Kloudlite",
+      logo: "/kloudlite.png",
+      description: "Cloud agnostic single console for the developers to manage their DevTools and Dev Infra",
+      sector: "Software (AI/ML)",
+      investedAt: "Seed",
+      currentStage: "Seed",
+      website: "https://kloudlite.io/",
+      founders: [],
+      coinvestors: ["Capital 2B"]
+    },
+    {
+      id: 8,
+      name: "Lodestone",
+      logo: "/lodestone.png",
+      description: "Tech-driven omni-channel maternal healthcare company",
+      sector: "Others",
+      investedAt: "Seed",
+      currentStage: "Seed",
+      website: "",
+      founders: [],
+      coinvestors: ["Eight Roads", "Kae Capital"]
+    },
+    {
+      id: 9,
+      name: "Knowl",
+      logo: "/knowl.png",
+      description: "AI agents for debt collection in BFSI",
+      sector: "Software (AI/ML)",
+      investedAt: "Seed",
+      currentStage: "Seed",
+      website: "https://www.knowl.ai/",
+      founders: [],
+      coinvestors: ["Capital 2B"]
+    },
+    {
+      id: 10,
+      name: "Molequle",
+      logo: "/molequle.png",
+      description: "B2B marketplace simplifying cross-border commerce in specialty chemicals",
+      sector: "Others",
+      investedAt: "Pre-Seed",
+      currentStage: "Pre-Seed",
+      website: "https://molequle.biz/",
+      founders: [],
+      coinvestors: ["First Cheque"]
+    },
+    {
+      id: 11,
+      name: "Dev Darshan",
+      logo: "/devdarshan.png",
+      description: "Devotional platform offering a digital way to connect with 5000+ temples across the Indian subcontinent",
+      sector: "Others",
+      investedAt: "Seed",
+      currentStage: "Seed",
+      website: "https://devdham.com/en-us",
+      founders: [],
+      coinvestors: ["Titan Capital", "All In Capital"]
+    },
+    {
+      id: 12,
+      name: "Flurn",
+      logo: "/flurn.png",
+      description: "Community-based offline ed-tech company, bringing 21st-century skills to children inside apartment complexes",
+      sector: "Others",
+      investedAt: "Seed",
+      currentStage: "Seed",
+      website: "https://flurn.in/",
+      founders: [],
+      coinvestors: ["Angels"]
+    },
+    {
+      id: 13,
+      name: "Covrzy",
+      logo: "/covrzy.png",
+      description: "Small ticket business insurance products for SMEs and startups; launched in deep partnerships with insurance companies",
+      sector: "Others",
+      investedAt: "Pre-Seed",
+      currentStage: "Pre-Seed",
+      website: "https://covrzy.com/",
+      founders: [],
+      coinvestors: ["Antler"]
+    },
+    {
+      id: 14,
+      name: "Mini Mines",
+      logo: "/minimines.png",
+      description: "Hybrid Hydrometallurgy Process that recycles lithium-ion batteries with >96% efficiency and purity",
+      sector: "Climatetech",
+      investedAt: "Pre-Seed",
+      currentStage: "Seed",
+      website: "https://m-mines.com/",
+      founders: [],
+      coinvestors: ["Beenext", "Axilor"]
+    },
+    {
+      id: 15,
+      name: "Truegradient",
+      logo: "/truegradient.png",
+      description: "No-code AI for demand forecasting helping brands improve sales and inventory efficiency by 20%",
+      sector: "Software (AI/ML)",
+      investedAt: "Pre-Seed",
+      currentStage: "Pre-Seed",
+      website: "https://truegradient.ai/",
+      founders: [],
+      coinvestors: ["Angels"]
+    },
+    {
+      id: 16,
+      name: "Swirl",
+      logo: "/swirl.png",
+      description: "No-code live commerce solution powering video shopping experiences for brands like LG, Vivo etc.",
+      sector: "Software (AI/ML)",
+      investedAt: "Seed",
+      currentStage: "Seed",
+      website: "https://www.goswirl.ai/",
+      founders: [],
+      coinvestors: ["Angels"]
+    },
+    {
+      id: 17,
+      name: "International Battery Company",
+      logo: "/ibc.png",
+      description: "India&apos;s first homegrown Li-ion cell manufacturer (NMC Cells), scaling from 50MWh to GWh factory",
+      sector: "Climatetech",
+      investedAt: "Seed",
+      currentStage: "Series A",
+      website: "https://ibcbatt.com/",
+      founders: [],
+      coinvestors: ["RTP Global", "Beenext"]
+    },
+    {
+      id: 18,
+      name: "Alt Carbon",
+      logo: "/altcarbon.png",
+      description: "Carbon Dioxide Removal using Enhanced Rock Weathering; world&apos;s cheapest ERW carbon credits",
+      sector: "Climatetech",
+      investedAt: "Pre-Seed",
+      currentStage: "Series A",
+      website: "https://www.alt-carbon.com/",
+      founders: [],
+      coinvestors: ["Lachy Groom Fund"]
+    },
+    {
+      id: 19,
+      name: "ZapScale",
+      logo: "/zapscale.png",
+      description: "AI-powered customer success platform helping B2B SaaS companies reduce churn and increase upsell",
+      sector: "Software (AI/ML)",
+      investedAt: "Seed",
+      currentStage: "Seed",
+      website: "https://www.zapscale.com/",
+      founders: [],
+      coinvestors: ["Blume Ventures"]
+    },
+    {
+      id: 20,
+      name: "SISIR Radar",
+      logo: "/sisir.png",
+      description: "World&apos;s highest-resolution L-band SAR developer; 35x better than NASA&apos;s L-band SAR at 10% cost",
+      sector: "Deeptech",
+      investedAt: "Seed",
+      currentStage: "Series A",
+      website: "https://www.sisirradar.com/",
+      founders: [],
+      coinvestors: ["360One Asset"]
+    },
+    {
+      id: 21,
+      name: "Avammune Therapeutics",
+      logo: "/avammune.png",
+      description: "Immunotherapy drug discovery company with a leading molecule that received $320M+ term sheet",
+      sector: "Deeptech",
+      investedAt: "Series A",
+      currentStage: "Series A",
+      website: "https://www.avammune.com/",
+      founders: [],
+      coinvestors: ["Capital 2B", "Kotak Lifesciences"]
+    },
+    {
+      id: 22,
+      name: "Tractrix",
+      logo: "/tractrix.png",
+      description: "Manufactures complex electro optical systems like collimators, surveillance and missile navigation systems",
+      sector: "Deeptech",
+      investedAt: "Seed",
+      currentStage: "Seed",
+      website: "https://www.tractrix.in/",
+      founders: [],
+      coinvestors: ["Beenext"]
+    },
+    {
+      id: 23,
+      name: "Drizz",
+      logo: "/drizz.png",
+      description: "AI-powered mobile app testing, reducing automation setup time from weeks to days for clients like Rapido & Zepto",
+      sector: "Software (AI/ML)",
+      investedAt: "Seed",
+      currentStage: "Seed",
+      website: "https://www.drizz.dev/",
+      founders: [],
+      coinvestors: ["Stellaris"]
+    },
+    {
+      id: 24,
+      name: "Crest Wealth",
+      logo: "/crestwealth.png",
+      description: "Tech-enabled fractional family office managing wealth for founders and HNWIs",
+      sector: "Others",
+      investedAt: "Seed",
+      currentStage: "Seed",
+      website: "https://www.crestwealthmgmt.com/",
+      founders: [],
+      coinvestors: ["Beenext", "Sparrow"]
+    },
+    {
+      id: 25,
+      name: "Inamo",
+      logo: "/inamo.png",
+      description: "Tech-driven Q-commerce ops enabler, optimizing dark stores and last-mile delivery for Blinkit and Zepto",
+      sector: "Others",
+      investedAt: "Seed",
+      currentStage: "Seed",
+      website: "https://www.inamo.in/",
+      founders: [],
+      coinvestors: ["Gemba Capital"]
+    },
+    {
+      id: 26,
+      name: "KhiladiPro",
+      logo: "/khiladipro.png",
+      description: "AI-powered sports tech platform helping athletes measure and optimize performance with data insights",
+      sector: "Software (AI/ML)",
+      investedAt: "Seed",
+      currentStage: "Seed",
+      website: "https://khiladipro.com/",
+      founders: [],
+      coinvestors: ["MGA Ventures"]
+    },
+    {
+      id: 27,
+      name: "Lokam",
+      logo: "/lokam.png",
+      description: "Trusted generic pharma retail chain offering alternatives that are 50% cheaper with 50%+ gross margins",
+      sector: "Others",
+      investedAt: "Pre-Seed",
+      currentStage: "Pre-Seed",
+      website: "https://lokam.ai/",
+      founders: [],
+      coinvestors: ["Angels"]
+    },
+    {
+      id: 28,
+      name: "Sanlayan",
+      logo: "/sanlayan.png",
+      description: "Aerospace & Defence company acquiring niche defense MSMEs and scaling them into system integrators",
+      sector: "Deeptech",
+      investedAt: "Series A",
+      currentStage: "Series A",
+      website: "https://www.sanlayan.com/",
+      founders: [],
+      coinvestors: ["Jungle Ventures", "Lucky Investment Managers"]
+    }
+  ];
 
   const sectors = [
     { 
@@ -415,7 +413,7 @@ const Portfolio: React.FC = () => {
   ];
 
   const getSectorIcon = (sector: string) => {
-    const sectorMap: { [key: string]: JSX.Element } = {
+    const sectorMap: { [key: string]: React.ReactElement } = {
       "Frontier Tech": (
         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
@@ -451,7 +449,6 @@ const Portfolio: React.FC = () => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setIsVisible(true);
           setTimeout(() => setAnimationStage(1), 200);
           setTimeout(() => setAnimationStage(2), 600);
           setTimeout(() => setAnimationStage(3), 1000);
@@ -464,13 +461,14 @@ const Portfolio: React.FC = () => {
       }
     );
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
+    const currentRef = sectionRef.current;
+    if (currentRef) {
+      observer.observe(currentRef);
     }
 
     return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
+      if (currentRef) {
+        observer.unobserve(currentRef);
       }
     };
   }, []);
@@ -519,10 +517,10 @@ const Portfolio: React.FC = () => {
             animationStage >= 1 ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
           }`}>
             <h1 className="text-3xl sm:text-4xl lg:text-5xl text-gray-900 leading-[1] tracking-tight font-bold mb-6">
-              Building Tomorrow's <span className="text-[#A90000]">Industry Leaders</span>
+              Building Tomorrow&apos;s <span className="text-[#A90000]">Industry Leaders</span>
             </h1>
             <p className="text-gray-500 text-md font-light leading-relaxed max-w-3xl mx-auto tracking-wide">
-              From climate solutions to AI breakthroughs, our portfolio represents the next generation of companies solving humanity's most pressing challenges through deep science and bold execution
+              From climate solutions to AI breakthroughs, our portfolio represents the next generation of companies solving humanity&apos;s most pressing challenges through deep science and bold execution
             </p>
           </div>
 
