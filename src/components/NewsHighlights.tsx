@@ -46,7 +46,7 @@ const NewsHighlights: React.FC = () => {
     },
       {
       "id": 3,
-      "title": "AvammuneTherapeutics, Posha, Inspecity others secure funding",
+      "title": "Avammune Therapeutics, Posha, Inspecity others secure funding",
       "source": "VCCircle",
       "image": "https://www.vccircle.com/wp-content/uploads/2024/12/funding-news-collage.jpg",
       "excerpt": "Multiple startups across healthcare, food tech, and inspection technology secure early-stage funding rounds.",
@@ -65,7 +65,7 @@ const NewsHighlights: React.FC = () => {
     },
     {
       "id": 5,
-      "title": "Spacetech Startup Sisir Radar Bags Funding To Offer Imaging Solutions",
+      "title": "Spacetech Startup SISIR Radar Bags Funding To Offer Imaging Solutions",
       "source": "Inc42",
       "image": "https://www.vccircle.com/wp-content/uploads/2024/12/funding-news-collage.jpg",
       "excerpt": "Spacetech startup Sisir Radar has raised $1.5 Mn (INR 12.45 Cr) in its seed funding round led by Shastra VC. The round also saw participation from Riverwalk Holdings and INVSTT.The Kolkata-based startup, which claims to have built India’s first drone-borne synthetic aperture radar (SAR) system, will utilise the fresh funds to strengthen its research and development (R&D) and manufacturing capabilities. It aims to launch the world’s highest resolution L-band SAR satellite by the end of 2026.",
@@ -197,7 +197,7 @@ const NewsHighlights: React.FC = () => {
               animationStage >= 1 ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
             }`} style={{ transitionDelay: "200ms" }}>
               <p className="text-gray-600 text-lg leading-relaxed font-light max-w-xl mb-8">
-                Discover the latest breakthrough wins, funding rounds, and achievements from our portfolio companies, shaping the future with bold ideas and relentless drive.
+                Discover the latest breakthrough wins, funding rounds, and achievements from our portfolio companies, shaping the future with bold ideas and relentless drive
               </p>
 
               {/* CTA Button */}

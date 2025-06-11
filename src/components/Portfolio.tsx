@@ -154,7 +154,7 @@ const Portfolio: React.FC = () => {
     {
       id: 11,
       name: "Dev Darshan",
-      logo: "/devdarshan.png",
+      logo: "/devdham.png",
       description: "Devotional platform offering a digital way to connect with 5000+ temples across the Indian subcontinent",
       sector: "Others",
       investedAt: "Seed",
@@ -192,7 +192,7 @@ const Portfolio: React.FC = () => {
       name: "Mini Mines",
       logo: "/minimines.png",
       description: "Hybrid Hydrometallurgy Process that recycles lithium-ion batteries with >96% efficiency and purity",
-      sector: "Climatetech",
+      sector: "Climate Tech",
       investedAt: "Pre-Seed",
       currentStage: "Seed",
       website: "https://m-mines.com/",
@@ -228,7 +228,7 @@ const Portfolio: React.FC = () => {
       name: "International Battery Company",
       logo: "/ibc.png",
       description: "India&apos;s first homegrown Li-ion cell manufacturer (NMC Cells), scaling from 50MWh to GWh factory",
-      sector: "Climatetech",
+      sector: "Climate Tech",
       investedAt: "Seed",
       currentStage: "Series A",
       website: "https://ibcbatt.com/",
@@ -240,7 +240,7 @@ const Portfolio: React.FC = () => {
       name: "Alt Carbon",
       logo: "/altcarbon.png",
       description: "Carbon Dioxide Removal using Enhanced Rock Weathering; world&apos;s cheapest ERW carbon credits",
-      sector: "Climatetech",
+      sector: "Climate Tech",
       investedAt: "Pre-Seed",
       currentStage: "Series A",
       website: "https://www.alt-carbon.com/",
@@ -379,7 +379,7 @@ const Portfolio: React.FC = () => {
       )
     },
     { 
-      name: "Deep Tech", 
+      name: "Deeptech", 
       icon: (
         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
@@ -412,31 +412,7 @@ const Portfolio: React.FC = () => {
     }
   ];
 
-  const getSectorIcon = (sector: string) => {
-    const sectorMap: { [key: string]: React.ReactElement } = {
-      "Frontier Tech": (
-        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-        </svg>
-      ),
-      "Climate Tech": (
-        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-      ),
-      "SaaS (AI/ML)": (
-        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-        </svg>
-      ),
-      "Others": (
-        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4" />
-        </svg>
-      )
-    };
-    return sectorMap[sector] || sectorMap["Others"];
-  };
+ 
 
   const filteredCompanies = companies.filter(company => {
     const matchesFilter = selectedFilter === "All" || company.sector === selectedFilter;
@@ -570,8 +546,8 @@ const Portfolio: React.FC = () => {
           {/* Desktop Table */}
           <div className="hidden lg:block">
             <div className="portfolio-table bg-white/50 backdrop-blur-sm border border-gray-200 rounded-lg overflow-visible">
-              {/* Table Header - Updated grid without founders column */}
-              <div className="portfolio-header grid grid-cols-11 gap-4 p-6 bg-gray-50/80 border-b border-gray-200">
+              {/* Table Header - Updated grid with better spacing */}
+              <div className="portfolio-header grid grid-cols-12 gap-4 p-6 bg-gray-50/80 border-b border-gray-200">
                 <div className="col-span-2">
                   <span className="text-xs font-medium text-gray-500 tracking-[0.1em] uppercase">Company</span>
                 </div>
@@ -587,17 +563,17 @@ const Portfolio: React.FC = () => {
                 <div className="col-span-1">
                   <span className="text-xs font-medium text-gray-500 tracking-[0.1em] uppercase">Current Stage</span>
                 </div>
-                <div className="col-span-2">
-                  <span className="text-xs font-medium text-gray-500 tracking-[0.1em] uppercase">Co-investors</span>
+                <div className="col-span-3">
+                  <span className="text-xs font-medium text-gray-500 tracking-[0.1em] uppercase">Other Investors</span>
                 </div>
               </div>
 
-              {/* Table Body - Updated grid without founders column */}
+              {/* Table Body - Updated grid with better spacing and min-height */}
               <div className="portfolio-body overflow-visible">
                 {filteredCompanies.map((company, index) => (
                   <motion.div
                     key={company.id}
-                    className={`portfolio-row grid grid-cols-11 gap-4 p-6 border-b border-gray-200 last:border-b-0 transition-all duration-500 cursor-pointer relative group ${
+                    className={`portfolio-row grid grid-cols-12 gap-4 p-6 border-b border-gray-200 last:border-b-0 transition-all duration-500 cursor-pointer relative group min-h-[80px] ${
                       hoveredCompany === company.id ? 'bg-gradient-to-r from-[#A90000]/5 via-[#A90000]/3 to-transparent' : 'hover:bg-gray-50/50'
                     }`}
                     style={{ overflow: 'visible' }}
@@ -613,9 +589,9 @@ const Portfolio: React.FC = () => {
                       hoveredCompany === company.id ? 'translate-x-full opacity-100' : '-translate-x-full opacity-0'
                     } pointer-events-none`} style={{ width: '200%', left: '-100%' }}></div>
 
-                    {/* Company Info */}
-                    <div className="col-span-2 flex items-center space-x-4 relative z-10">
-                      <div className="company-logo w-12 h-12 bg-white rounded-lg border border-gray-200 flex items-center justify-center overflow-hidden">
+                    {/* Company Info - Fixed width and text wrapping */}
+                    <div className="col-span-2 flex items-center space-x-4 relative z-10 min-w-0">
+                      <div className="company-logo w-12 h-12 bg-white rounded-lg border border-gray-200 flex items-center justify-center overflow-hidden flex-shrink-0">
                         <Image
                           src={company.logo}
                           alt={`${company.name} logo`}
@@ -624,53 +600,48 @@ const Portfolio: React.FC = () => {
                           className="object-contain"
                         />
                       </div>
-                      <div>
-                        <h3 className="text-lg font-semibold text-gray-900 tracking-tight">{company.name}</h3>
+                      <div className="min-w-0 flex-1">
+                        <h3 className="text-lg font-semibold text-gray-900 tracking-tight leading-tight break-words">
+                          {company.name}
+                        </h3>
                       </div>
                     </div>
 
-                    {/* Sector with Icon and Tooltip */}
-                    <div className="col-span-1 flex items-center relative z-10">
-                      <div 
-                        className="group/tooltip relative text-gray-600 hover:text-[#A90000] transition-colors duration-200"
-                        title={company.sector}
-                      >
-                        {getSectorIcon(company.sector)}
-                        <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-gray-900 text-white text-xs rounded-lg opacity-0 group-hover/tooltip:opacity-100 transition-opacity duration-200 whitespace-nowrap z-[9999]">
-                          {company.sector}
-                          <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-900"></div>
-                        </div>
-                      </div>
+                    {/* Sector with Name - Fixed width */}
+                    <div className="col-span-1 flex items-center relative z-10 min-w-0">
+                      <span className="text-sm text-gray-700 font-medium break-words">
+                        {company.sector}
+                      </span>
                     </div>
 
-                    {/* Description - Expanded to take more space */}
-                    <div className="col-span-4 flex items-center relative z-10">
-                      <p className="text-sm text-gray-600 font-light leading-relaxed">
+                    {/* Description - Fixed width and text wrapping */}
+                    <div className="col-span-4 flex items-center relative z-10 min-w-0">
+                      <p className="text-sm text-gray-600 font-light leading-relaxed break-words">
                         {company.description}
                       </p>
                     </div>
 
-                    {/* Invested At */}
-                    <div className="col-span-1 flex items-center relative z-10">
-                      <span className="inline-block px-3 py-1 bg-gray-100 text-gray-700 text-xs font-medium rounded-full">
+                    {/* Invested At - Fixed width */}
+                    <div className="col-span-1 flex items-center relative z-10 min-w-0">
+                      <span className="inline-block px-3 py-1 bg-gray-100 text-gray-700 text-xs font-medium rounded-full whitespace-nowrap">
                         {company.investedAt}
                       </span>
                     </div>
 
-                    {/* Current Stage */}
-                    <div className="col-span-1 flex items-center relative z-10">
-                      <span className="inline-block px-3 py-1 bg-red-100 text-red-700 text-xs font-medium rounded-full">
+                    {/* Current Stage - Fixed width */}
+                    <div className="col-span-1 flex items-center relative z-10 min-w-0">
+                      <span className="inline-block px-3 py-1 bg-red-100 text-red-700 text-xs font-medium rounded-full whitespace-nowrap">
                         {company.currentStage}
                       </span>
                     </div>
 
-                    {/* Co-investors - Expanded to take more space */}
-                    <div className="col-span-2 flex items-center justify-between relative z-10">
-                      <span className="text-sm text-gray-600 font-light">
+                    {/* Co-investors - Expanded width and text wrapping */}
+                    <div className="col-span-3 flex items-center justify-between relative z-10 min-w-0">
+                      <span className="text-sm text-gray-600 font-light break-words flex-1 mr-3">
                         {company.coinvestors.join(", ")}
                       </span>
                       <svg 
-                        className={`w-5 h-5 text-gray-400 transition-all duration-300 ${
+                        className={`w-5 h-5 text-gray-400 transition-all duration-300 flex-shrink-0 ${
                           hoveredCompany === company.id ? 'text-[#A90000] translate-x-1' : ''
                         }`} 
                         fill="none" 
@@ -686,7 +657,7 @@ const Portfolio: React.FC = () => {
             </div>
           </div>
 
-          {/* Mobile Cards - Founders removed from mobile view too */}
+          {/* Mobile Cards - Also updated to show sector name instead of icon */}
           <div className="lg:hidden space-y-4">
             {filteredCompanies.map((company, index) => (
               <motion.div
@@ -717,8 +688,8 @@ const Portfolio: React.FC = () => {
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-1">
                       <h3 className="text-lg font-semibold text-gray-900 tracking-tight">{company.name}</h3>
-                      <span className="text-gray-600" title={company.sector}>
-                        {getSectorIcon(company.sector)}
+                      <span className="text-xs px-2 py-1 bg-gray-100 text-gray-700 rounded-full font-medium">
+                        {company.sector}
                       </span>
                     </div>
                     <div className="flex items-center gap-2">

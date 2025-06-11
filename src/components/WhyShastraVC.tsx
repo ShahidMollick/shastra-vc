@@ -24,19 +24,19 @@ const WhyShastraVC: React.FC = () => {
       id: 1,
       title: "Founder First",
       subtitle: "Been There, Done That",
-      description: "We&apos;ve been in your shoes. We know how tough the early days can be. That&apos;s exactly why we built Shastra to help you avoid common pitfalls, offer honest feedback, and open up a network we&apos;ve built over years of building, and backing companies."
+      description: "We&apos;ve been in your shoes. We know how tough the early days can be. That&apos;s exactly why we built Shastra to help you avoid common pitfalls, offer honest feedback, and open up a network we&apos;ve built over years of building, and backing companies"
     },
     {
       id: 2,
       title: "Active",
       subtitle: "Beyond Board Meetings",
-      description: "We don&apos;t just show up at board meetings, we show up when it truly matters. Whether it&apos;s a midnight call across time zones, a GTM crisis, or a last-minute deck before your next round, we are there rolling up our sleeves."
+      description: "We don&apos;t just show up at board meetings, we show up when it truly matters. Whether it&apos;s a midnight call across time zones, a GTM crisis, or a last-minute deck before your next round, we are there rolling up our sleeves"
     },
     {
       id: 3,
       title: "Growth",
       subtitle: "Tested Playbooks & Networks",
-      description: "We bring tested playbooks for your GTM, organization building, and fundraising. From refining your sales motion to mapping your next fundraise, we help you scale with clarity and connect you to our extended network of advisors."
+      description: "We bring tested playbooks for your GTM, organization building, and fundraising. From refining your sales motion to mapping your next fundraise, we help you scale with clarity and connect you to our extended network of advisors"
     }
   ];
 

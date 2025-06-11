@@ -164,7 +164,7 @@ const OurFocus: React.FC = () => {
                   solutions. From space technology to
                   climate resilience and AI-native software, these aren&apos;t just
                   investment themes; they&apos;re the building blocks of tomorrow&apos;s
-                  economy.
+                  economy
                 </p>
               </div>
             </div>

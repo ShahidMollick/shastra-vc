@@ -114,7 +114,7 @@ const TeamPage: React.FC = () => {
                 animate={animationStage >= 1 ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                 transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
               >
-                A diverse collective of operators, founders, and investors united by our shared conviction in backing bold ideas that shape tomorrow&apos;s economy.
+                A diverse collective of operators, founders, and investors united by our shared conviction in backing bold ideas that shape tomorrow&apos;s economy
               </motion.p>
             </div>
           </div>
@@ -345,13 +345,13 @@ const TeamMemberModal: React.FC<{
           {/* Content Section */}
           <div className="p-8 lg:p-12">
             <div className="mb-6">
-              <div className={`inline-block px-3 py-1.5 text-xs font-medium mb-4 ${
+              {/* <div className={`inline-block px-3 py-1.5 text-xs font-medium mb-4 ${
                 member.category === 'founder' 
                   ? 'bg-[#A90000] text-white' 
                   : 'bg-gray-100 text-gray-800'
               }`}>
                 {member.category === 'founder' ? 'FOUNDER' : 'TEAM MEMBER'}
-              </div>
+              </div> */}
               
               <h2 className="text-3xl lg:text-4xl font-light tracking-tight leading-tight text-black mb-2">
                 {member.name}

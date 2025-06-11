@@ -39,10 +39,10 @@ const Footer: React.FC = () => {
           <div className="md:col-span-4">
             <div className="flex flex-col sm:flex-row md:flex-col lg:flex-row gap-6 lg:gap-8">
               <a 
-                href="#our-focus" 
+                href="#" 
                 className="text-base text-gray-600 hover:text-[#A90000] transition-colors duration-300 font-light"
               >
-                Our Focus
+                Home 
               </a>
               <a 
                 href="/portfolio" 

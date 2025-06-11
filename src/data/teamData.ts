@@ -54,7 +54,7 @@ export const teamData: TeamMember[] = [
   {
     id: 6,
     name: "Shachi Jalote",
-    title: "Analyst",
+    title: "Investment Analyst",
     image: "/founder-6.png",
     bio: "Shachi Jalote is an Analyst at Shastra VC. She joined the firm in 2025, driven by a growing interest in deeptech and AI, and a desire to work closely with startups building new and impactful technologies. Her interest in venture capital began during her tenure at Beyond Next Ventures, shortly after graduating from IIT Kharagpur with an Integrated MSc in Economics. Before joining Shastra, she worked as a consultant at Arthur D. Little, focusing on projects with clients in Saudi Arabia.",
     linkedin: "https://www.linkedin.com/in/shachi-jalote/",
