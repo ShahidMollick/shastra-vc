@@ -373,7 +373,7 @@ const Portfolio: React.FC = () => {
     { 
       name: "All", 
       icon: (
-        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
       )
@@ -381,7 +381,7 @@ const Portfolio: React.FC = () => {
     { 
       name: "Deeptech", 
       icon: (
-        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
         </svg>
       )
@@ -389,7 +389,7 @@ const Portfolio: React.FC = () => {
     { 
       name: "Climate Tech", 
       icon: (
-        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
       )
@@ -397,7 +397,7 @@ const Portfolio: React.FC = () => {
     { 
       name: "Software (AI/ML)", 
       icon: (
-        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
         </svg>
       )
@@ -405,7 +405,7 @@ const Portfolio: React.FC = () => {
     { 
       name: "Others", 
       icon: (
-        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4" />
         </svg>
       )
@@ -436,8 +436,8 @@ const Portfolio: React.FC = () => {
       },
       {
         root: null,
-        rootMargin: "-100px",
-        threshold: 0.15,
+        rootMargin: "-50px",
+        threshold: 0.1,
       }
     );
 
@@ -456,11 +456,11 @@ const Portfolio: React.FC = () => {
   return (
     <section 
       ref={sectionRef} 
-      className="portfolio-section py-16 md:py-24 lg:py-32 bg-[#FFFDF7] overflow-hidden"
+      className="portfolio-section py-8 sm:py-12 md:py-16 lg:py-24 xl:py-32 bg-[#FFFDF7] overflow-hidden min-h-screen"
       id="portfolio"
     >
       {/* Background Grid Pattern */}
-      <div className="absolute inset-0 opacity-20">
+      <div className="absolute inset-0 opacity-20 sm:opacity-20">
         <div className="absolute inset-0" style={{
           backgroundImage: `
             linear-gradient(rgba(169, 0, 0, 0.15) 1px, transparent 1px),
@@ -476,45 +476,45 @@ const Portfolio: React.FC = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-[rgba(255,253,247,0.4)] via-transparent to-[rgba(255,253,247,0.6)]"></div>
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative z-10 max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
         {/* Header Section */}
-        <div className="mb-12 lg:mb-16">
+        <div className="mb-8 sm:mb-12 lg:mb-16">
           {/* Badge */}
-          <div className={`mb-8 transition-all duration-1000 ease-out ${
+          <div className={`mb-6 sm:mb-8 transition-all duration-1000 ease-out ${
             animationStage >= 1 ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}>
             <div className="flex items-center justify-center">
-              <div className="w-16 h-px bg-gray-300"></div>
-              <span className="text-gray-500 text-xs font-light tracking-[0.25em] uppercase px-4">
+              <div className="w-8 sm:w-12 md:w-16 h-px bg-gray-300"></div>
+              <span className="text-gray-500 text-xs font-light tracking-[0.15em] sm:tracking-[0.25em] uppercase px-3 sm:px-4">
                 Our Portfolio
               </span>
-              <div className="w-16 h-px bg-gray-300"></div>
+              <div className="w-8 sm:w-12 md:w-16 h-px bg-gray-300"></div>
             </div>
           </div>
 
           {/* Main Heading */}
-          <div className={`text-center mb-8 transition-all duration-1200 ease-out ${
+          <div className={`text-center mb-6 sm:mb-8 transition-all duration-1200 ease-out ${
             animationStage >= 1 ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
           }`}>
-            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-gray-900 leading-tight tracking-tight font-bold mb-4 md:mb-6">
+            <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-gray-900 leading-tight tracking-tight font-bold mb-3 sm:mb-4 md:mb-6 px-2">
               Building Tomorrow&apos;s <span className="text-[#A90000]">Industry Leaders</span>
             </h1>
-            <p className="text-gray-500 text-sm md:text-base font-light leading-relaxed max-w-3xl mx-auto tracking-wide px-4">
+            <p className="text-gray-500 text-xs sm:text-sm md:text-base font-light leading-relaxed max-w-3xl mx-auto tracking-wide px-4 sm:px-6">
               From climate solutions to AI breakthroughs, our portfolio represents the next generation of companies solving humanity&apos;s most pressing challenges through deep science and bold execution
             </p>
           </div>
 
           {/* Filters and Search */}
-          <div className={`flex flex-col gap-4 md:gap-6 transition-all duration-1000 ease-out ${
+          <div className={`flex flex-col gap-3 sm:gap-4 md:gap-6 transition-all duration-1000 ease-out ${
             animationStage >= 2 ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}>
             {/* Sector Filters */}
-            <div className="flex flex-wrap gap-2 justify-center">
+            <div className="flex flex-wrap gap-1.5 sm:gap-2 justify-center px-2">
               {sectors.map((sector) => (
                 <button
                   key={sector.name}
                   onClick={() => setSelectedFilter(sector.name)}
-                  className={`px-3 md:px-4 py-2 text-xs md:text-sm font-medium transition-all duration-300 rounded-full border flex items-center gap-1 md:gap-2 ${
+                  className={`px-2 sm:px-3 md:px-4 py-1.5 sm:py-2 text-xs md:text-sm font-medium transition-all duration-300 rounded-full border flex items-center gap-1 md:gap-2 ${
                     selectedFilter === sector.name
                       ? "bg-[#A90000] text-white border-[#A90000]"
                       : "cursor-pointer text-gray-600 border-gray-300 hover:border-[#A90000] hover:text-[#A90000]"
@@ -522,22 +522,22 @@ const Portfolio: React.FC = () => {
                   title={sector.name}
                 >
                   <span className="hidden sm:block">{sector.icon}</span>
-                  <span className="whitespace-nowrap">{sector.name}</span>
+                  <span className="whitespace-nowrap text-xs sm:text-sm">{sector.name}</span>
                 </button>
               ))}
             </div>
 
             {/* Search */}
-            <div className="flex justify-center">
+            <div className="flex justify-center px-4">
               <div className="relative w-full max-w-sm">
                 <input
                   type="text"
                   placeholder="Search companies..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="pl-10 pr-4 py-2 w-full border border-gray-300 text-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#A90000] focus:border-transparent text-sm"
+                  className="pl-8 sm:pl-10 pr-4 py-2 w-full border border-gray-300 text-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#A90000] focus:border-transparent text-sm"
                 />
-                <svg className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg className="absolute left-2 sm:left-3 top-2.5 h-4 w-4 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
               </div>
@@ -549,7 +549,7 @@ const Portfolio: React.FC = () => {
         <div className={`transition-all duration-1200 ease-out ${
           animationStage >= 3 ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
         }`}>
-          {/* Desktop Table - Only show on very large screens (1280px+) */}
+          {/* Desktop Table - Only show on very large screens (1536px+) */}
           <div className="hidden 2xl:block">
             <div className="portfolio-table bg-white/50 backdrop-blur-sm border border-gray-200 rounded-lg overflow-hidden">
               {/* Table Header */}
@@ -658,12 +658,12 @@ const Portfolio: React.FC = () => {
           </div>
 
           {/* Card Layout - Show on all screens smaller than 2xl (below 1536px) */}
-          <div className="2xl:hidden space-y-4 sm:space-y-6">
+          <div className="2xl:hidden space-y-3 sm:space-y-4 md:space-y-6">
             {filteredCompanies.length > 0 ? (
               filteredCompanies.map((company, index) => (
                 <motion.div
                   key={company.id}
-                  className="portfolio-card bg-white/70 backdrop-blur-sm border border-gray-200 rounded-lg p-4 sm:p-6 transition-all duration-300 cursor-pointer relative overflow-hidden group"
+                  className="portfolio-card bg-white/70 backdrop-blur-sm border border-gray-200 rounded-lg p-3 sm:p-4 md:p-6 transition-all duration-300 cursor-pointer relative overflow-hidden group"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.05 }}
@@ -677,34 +677,34 @@ const Portfolio: React.FC = () => {
                   }`} style={{ width: '200%', left: '-100%' }}></div>
 
                   {/* Header with logo, name, and sector */}
-                  <div className="flex items-start gap-4 mb-4 relative z-10">
-                    <div className="company-logo w-12 h-12 sm:w-14 sm:h-14 bg-white rounded-lg border border-gray-200 flex items-center justify-center overflow-hidden flex-shrink-0">
+                  <div className="flex items-start gap-3 sm:gap-4 mb-3 sm:mb-4 relative z-10">
+                    <div className="company-logo w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 bg-white rounded-lg border border-gray-200 flex items-center justify-center overflow-hidden flex-shrink-0">
                       <Image
                         src={company.logo}
                         alt={`${company.name} logo`}
-                        width={40}
-                        height={40}
-                        className="object-contain"
+                        width={32}
+                        height={32}
+                        className="object-contain w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10"
                       />
                     </div>
                     
                     <div className="flex-1 min-w-0">
-                      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-3">
-                        <div className="flex-1">
-                          <h3 className="text-lg sm:text-xl font-semibold text-gray-900 tracking-tight break-words mb-1">
+                      <div className="flex flex-col gap-2 mb-2 sm:mb-3">
+                        <div className="flex items-start justify-between gap-2">
+                          <h3 className="text-sm sm:text-lg md:text-xl font-semibold text-gray-900 tracking-tight break-words leading-tight">
                             {company.name}
                           </h3>
-                          <span className="inline-block text-xs px-2 py-1 bg-gray-100 text-gray-700 rounded-full font-medium">
-                            {company.sector}
-                          </span>
+                          <svg className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                          </svg>
                         </div>
                         
-                        <svg className="w-5 h-5 text-gray-400 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                        </svg>
+                        <span className="inline-block text-xs px-2 py-1 bg-gray-100 text-gray-700 rounded-full font-medium w-fit">
+                          {company.sector}
+                        </span>
                       </div>
                       
-                      <div className="flex flex-wrap items-center gap-2 text-sm">
+                      <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 text-xs sm:text-sm">
                         <span className="font-medium text-gray-700 bg-blue-50 px-2 py-1 rounded text-xs">
                           {company.investedAt}
                         </span>
@@ -717,16 +717,16 @@ const Portfolio: React.FC = () => {
                   </div>
 
                   {/* Description */}
-                  <p className="text-sm text-gray-600 font-light leading-relaxed mb-4 relative z-10">
+                  <p className="text-xs sm:text-sm text-gray-600 font-light leading-relaxed mb-3 sm:mb-4 relative z-10">
                     {company.description}
                   </p>
 
                   {/* Co-investors */}
                   {company.coinvestors.length > 0 && (
-                    <div className="border-t border-gray-100 pt-3 relative z-10">
-                      <div className="flex flex-col sm:flex-row sm:items-center gap-2">
-                        <span className="text-xs font-medium text-gray-500 whitespace-nowrap">Co-investors:</span>
-                        <span className="text-xs text-gray-600 break-words">
+                    <div className="border-t border-gray-100 pt-2 sm:pt-3 relative z-10">
+                      <div className="flex flex-col gap-1 sm:gap-2">
+                        <span className="text-xs font-medium text-gray-500">Co-investors:</span>
+                        <span className="text-xs text-gray-600 break-words leading-relaxed">
                           {company.coinvestors.join(", ")}
                         </span>
                       </div>
@@ -735,15 +735,15 @@ const Portfolio: React.FC = () => {
                 </motion.div>
               ))
             ) : (
-              <div className="text-center py-12">
-                <p className="text-gray-500 text-lg">No companies found matching your criteria.</p>
+              <div className="text-center py-8 sm:py-12">
+                <p className="text-gray-500 text-sm sm:text-lg">No companies found matching your criteria.</p>
               </div>
             )}
           </div>
 
           {/* Results count */}
-          <div className="mt-8 text-center">
-            <p className="text-sm text-gray-500 font-light">
+          <div className="mt-6 sm:mt-8 text-center">
+            <p className="text-xs sm:text-sm text-gray-500 font-light">
               Showing {filteredCompanies.length} of {companies.length} portfolio companies
             </p>
           </div>
@@ -753,6 +753,9 @@ const Portfolio: React.FC = () => {
       <style jsx>{`
         .portfolio-section {
           position: relative;
+          width: 100%;
+          max-width: 100vw;
+          overflow-x: hidden;
         }
         
         .portfolio-section::before {
@@ -761,9 +764,15 @@ const Portfolio: React.FC = () => {
           top: 0;
           left: 50%;
           transform: translateX(-50%);
-          width: 50px;
+          width: 30px;
           height: 1px;
           background-color: rgba(169, 0, 0, 0.3);
+        }
+
+        @media (min-width: 640px) {
+          .portfolio-section::before {
+            width: 50px;
+          }
         }
 
         .portfolio-row {
@@ -782,6 +791,19 @@ const Portfolio: React.FC = () => {
 
         .company-logo {
           transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Ensure mobile viewport handling */
+        @media (max-width: 640px) {
+          .portfolio-section {
+            min-height: 100vh;
+            padding-left: 0;
+            padding-right: 0;
+          }
+          
+          * {
+            box-sizing: border-box;
+          }
         }
 
         @media (prefers-reduced-motion: reduce) {
