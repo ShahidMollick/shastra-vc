@@ -175,7 +175,7 @@ const Founders: React.FC = () => {
             animate={animationStage >= 1 ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
           >
-            We&apos;re a diverse, hands-on team of operators, founders, and investors backing bold ideas with smart capital. If you&apos;re building something interesting, we&apos;d love to hear from you
+            We're a diverse, hands-on team of operators, founders, and investors backing bold ideas with smart capital. If you're building something interesting, we'd love to hear from you
           </motion.p>
 
           {/* CTA Section */}

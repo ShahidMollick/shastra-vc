@@ -24,7 +24,7 @@ const FundingGlance: React.FC = () => {
   const fundingMetrics: FundingMetric[] = useMemo(() => [
     {
       label: "Patents filed by our portfolio",
-      value: 14,
+      value: 20,
       plus: true,
       gridArea: "psi",
     },
@@ -250,7 +250,7 @@ const FundingGlance: React.FC = () => {
               }`}
               style={{ transitionDelay: "400ms" }}
             >
-             With over $75 million in capital deployed, we&apos;ve backed 35+ startups that are building breakthrough, science-led innovations, many of which are redefining global standards in technology
+             With over $50M million in capital deployed, we've backed 30+ startups that are building breakthrough, science-led innovations, many of which are redefining global standards in technology
             </p>
             
             {/* Button with "pitch to us" style but outlined */}

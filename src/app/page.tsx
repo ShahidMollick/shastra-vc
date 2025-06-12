@@ -9,6 +9,7 @@ import Header from "@/components/Header";
 import OurFocus from "@/components/OurFocus";
 import Founders from "@/components/Founders";
 import Footer from "@/components/Footer";
+import Link from "next/link";
 
 
 // StatCard component for animated stats
@@ -164,7 +165,7 @@ export default function Home() {
             <h1 className="text-[#A90000] text-3xl xs:text-4xl sm:text-5xl md:text-5xl lg:text-6xl xl:text-5xl 2xl:text-6xl font-medium tracking-[2px] xs:tracking-[3px] sm:tracking-[4px] md:tracking-[6px] lg:tracking-[8px] xl:tracking-[10px] 2xl:tracking-[12px] leading-tight -mt-8 sm:-mt-12 md:-mt-16 lg:-mt-35">
               {/* Mobile-optimized line breaks for better readability */}
               <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-0">
-              <span className={`inline-block transition-all duration-500 delay-0 ${animationStage >= 3 ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-6 scale-95'}`}>BELIEVE</span>
+              <span className={`inline-block transition-all duration-500 delay-0 ${animationStage >= 3 ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-6 scale-95'}`}>BELIEF</span>
               <span className={`hidden sm:inline-block mx-3 md:mx-4 lg:mx-5 transition-all duration-500 delay-150 ${animationStage >= 3 ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-6 scale-95'}`}>•</span>
               <span className={`inline-block transition-all duration-500 delay-300 ${animationStage >= 3 ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-6 scale-95'}`}>CONVICTION</span>
               <span className={`hidden sm:inline-block mx-3 md:mx-4 lg:mx-5 transition-all duration-500 delay-450 ${animationStage >= 3 ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-6 scale-95'}`}>•</span>
@@ -195,12 +196,12 @@ export default function Home() {
                 At Shastra, we back founders in deep tech, climate tech, and AI, at a stage where belief comes before proof, and conviction fuels those shaping what tomorrow looks like. We partner early, when vision matters more than metrics, and direction still outweighs validation
               </p>
 
-              <button className={`bg-[#A90000] text-white px-4 py-2.5 sm:px-6 sm:py-3 lg:px-8 lg:py-4 text-sm sm:text-base hover:bg-red-700 transition-all duration-300 flex items-center gap-2 hover:scale-105 hover:shadow-lg group ${
-                animationStage >= 4 ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'
-              }`} style={{ transitionDelay: '400ms' }}>
-                Our Portfolio
-                <span className="text-xs transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1">↗</span>
-              </button>
+              <Link href="/portfolio" className={`bg-[#A90000] text-white px-4 py-2.5 sm:px-6 sm:py-3 lg:px-8 lg:py-4 text-sm sm:text-base hover:bg-red-700 transition-all duration-300 flex items-center gap-2 hover:scale-105 hover:shadow-lg group inline-flex ${
+  animationStage >= 4 ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'
+}`} style={{ transitionDelay: '400ms' }}>
+  Our Portfolio
+  <span className="text-xs transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1">↗</span>
+</Link>
             </div>
 
             {/* Right Column - Stats */}
@@ -220,7 +221,7 @@ export default function Home() {
                     }`}></div>
                   </div>
                   <StatCard 
-                    number="$75M+" 
+                    number="$50MM+" 
                     label="Assets Under Management" 
                     delay="1300ms"
                     isVisible={animationStage >= 4}
@@ -238,7 +239,7 @@ export default function Home() {
                     }`}></div>
                   </div>
                   <StatCard 
-                    number="35+" 
+                    number="30+" 
                     label="Startups Invested" 
                     delay="1400ms"
                     isVisible={animationStage >= 4}

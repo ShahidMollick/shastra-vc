@@ -24,10 +24,10 @@ interface PortfolioCompany {
 }
 
 const Portfolio: React.FC = () => {
-  const [animationStage, setAnimationStage] = useState(0);
   const [selectedFilter, setSelectedFilter] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
   const [hoveredCompany, setHoveredCompany] = useState<number | null>(null);
+  const [isVisible, setIsVisible] = useState(true); // Always visible
   const sectionRef = useRef<HTMLDivElement>(null);
 
   const companies: PortfolioCompany[] = [
@@ -71,7 +71,7 @@ const Portfolio: React.FC = () => {
       id: 4,
       name: "Simplismart",
       logo: "/simplismart.png",
-      description: "One-stop ML Ops infra platform with world&apos;s fastest AI inference engine, reducing compute costs by 80% and latency by 3x",
+      description: "One-stop ML Ops infra platform with world's fastest AI inference engine, reducing compute costs by 80% and latency by 3x",
       sector: "Software (AI/ML)",
       investedAt: "Pre-Seed",
       currentStage: "Series A",
@@ -95,7 +95,7 @@ const Portfolio: React.FC = () => {
       id: 6,
       name: "Alltius",
       logo: "/alltius.png",
-      description: "Developing a conversational AI tool for SaaS enablement that offers interactive and personalized guidance using proprietary LLM trained on SaaS companies&apos; data",
+      description: "Developing a conversational AI tool for SaaS enablement that offers interactive and personalized guidance using proprietary LLM trained on SaaS companies' data",
       sector: "Software (AI/ML)",
       investedAt: "Seed",
       currentStage: "Seed",
@@ -117,8 +117,8 @@ const Portfolio: React.FC = () => {
     },
     {
       id: 8,
-      name: "Lodestone",
-      logo: "/lodestone.png",
+      name: "Everheal",
+      logo: "/everheal.png",
       description: "Tech-driven omni-channel maternal healthcare company",
       sector: "Others",
       investedAt: "Seed",
@@ -227,7 +227,7 @@ const Portfolio: React.FC = () => {
       id: 17,
       name: "International Battery Company",
       logo: "/ibc.png",
-      description: "India&apos;s first homegrown Li-ion cell manufacturer (NMC Cells), scaling from 50MWh to GWh factory",
+      description: "India's first homegrown Li-ion cell manufacturer (NMC Cells), scaling from 50MWh to GWh factory",
       sector: "Climate Tech",
       investedAt: "Seed",
       currentStage: "Series A",
@@ -239,7 +239,7 @@ const Portfolio: React.FC = () => {
       id: 18,
       name: "Alt Carbon",
       logo: "/altcarbon.png",
-      description: "Carbon Dioxide Removal using Enhanced Rock Weathering; world&apos;s cheapest ERW carbon credits",
+      description: "Carbon Dioxide Removal using Enhanced Rock Weathering; world's cheapest ERW carbon credits",
       sector: "Climate Tech",
       investedAt: "Pre-Seed",
       currentStage: "Series A",
@@ -263,7 +263,7 @@ const Portfolio: React.FC = () => {
       id: 20,
       name: "SISIR Radar",
       logo: "/sisir.png",
-      description: "World&apos;s highest-resolution L-band SAR developer; 35x better than NASA&apos;s L-band SAR at 10% cost",
+      description: "World's highest-resolution L-band SAR developer; 35x better than NASA's L-band SAR at 10% cost",
       sector: "Deeptech",
       investedAt: "Seed",
       currentStage: "Series A",
@@ -425,48 +425,25 @@ const Portfolio: React.FC = () => {
     }
   };
 
+  // Simplified useEffect - no complex animations
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setTimeout(() => setAnimationStage(1), 200);
-          setTimeout(() => setAnimationStage(2), 600);
-          setTimeout(() => setAnimationStage(3), 1000);
-        }
-      },
-      {
-        root: null,
-        rootMargin: "-50px",
-        threshold: 0.1,
-      }
-    );
-
-    const currentRef = sectionRef.current;
-    if (currentRef) {
-      observer.observe(currentRef);
-    }
-
-    return () => {
-      if (currentRef) {
-        observer.unobserve(currentRef);
-      }
-    };
+    setIsVisible(true);
   }, []);
 
   return (
     <section 
       ref={sectionRef} 
-      className="portfolio-section py-8 sm:py-12 md:py-16 lg:py-24 xl:py-32 bg-[#FFFDF7] overflow-hidden min-h-screen"
+      className="portfolio-section py-8 sm:py-12 md:py-16 lg:py-24 bg-[#FFFDF7] overflow-hidden min-h-screen"
       id="portfolio"
     >
       {/* Background Grid Pattern */}
-      <div className="absolute inset-0 opacity-20 sm:opacity-20">
+      <div className="absolute inset-0 opacity-10 sm:opacity-20">
         <div className="absolute inset-0" style={{
           backgroundImage: `
             linear-gradient(rgba(169, 0, 0, 0.15) 1px, transparent 1px),
             linear-gradient(90deg, rgba(169, 0, 0, 0.15) 1px, transparent 1px)
           `,
-          backgroundSize: '80px 80px'
+          backgroundSize: '40px 40px'
         }}></div>
       </div>
 
@@ -478,11 +455,9 @@ const Portfolio: React.FC = () => {
 
       <div className="relative z-10 max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
         {/* Header Section */}
-        <div className="mb-8 sm:mb-12 lg:mb-16">
+        <div className="mb-8 sm:mb-12 lg:mb-16 opacity-100">
           {/* Badge */}
-          <div className={`mb-6 sm:mb-8 transition-all duration-1000 ease-out ${
-            animationStage >= 1 ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-          }`}>
+          <div className="mb-6 sm:mb-8">
             <div className="flex items-center justify-center">
               <div className="w-8 sm:w-12 md:w-16 h-px bg-gray-300"></div>
               <span className="text-gray-500 text-xs font-light tracking-[0.15em] sm:tracking-[0.25em] uppercase px-3 sm:px-4">
@@ -493,21 +468,17 @@ const Portfolio: React.FC = () => {
           </div>
 
           {/* Main Heading */}
-          <div className={`text-center mb-6 sm:mb-8 transition-all duration-1200 ease-out ${
-            animationStage >= 1 ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-          }`}>
+          <div className="text-center mb-6 sm:mb-8">
             <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-gray-900 leading-tight tracking-tight font-bold mb-3 sm:mb-4 md:mb-6 px-2">
-              Building Tomorrow&apos;s <span className="text-[#A90000]">Industry Leaders</span>
+              Building Tomorrow's <span className="text-[#A90000]">Industry Leaders</span>
             </h1>
             <p className="text-gray-500 text-xs sm:text-sm md:text-base font-light leading-relaxed max-w-3xl mx-auto tracking-wide px-4 sm:px-6">
-              From climate solutions to AI breakthroughs, our portfolio represents the next generation of companies solving humanity&apos;s most pressing challenges through deep science and bold execution
+              From climate solutions to AI breakthroughs, our portfolio represents the next generation of companies solving humanity's most pressing challenges through deep science and bold execution
             </p>
           </div>
 
           {/* Filters and Search */}
-          <div className={`flex flex-col gap-3 sm:gap-4 md:gap-6 transition-all duration-1000 ease-out ${
-            animationStage >= 2 ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-          }`}>
+          <div className="flex flex-col gap-3 sm:gap-4 md:gap-6">
             {/* Sector Filters */}
             <div className="flex flex-wrap gap-1.5 sm:gap-2 justify-center px-2">
               {sectors.map((sector) => (
@@ -517,7 +488,7 @@ const Portfolio: React.FC = () => {
                   className={`px-2 sm:px-3 md:px-4 py-1.5 sm:py-2 text-xs md:text-sm font-medium transition-all duration-300 rounded-full border flex items-center gap-1 md:gap-2 ${
                     selectedFilter === sector.name
                       ? "bg-[#A90000] text-white border-[#A90000]"
-                      : "cursor-pointer text-gray-600 border-gray-300 hover:border-[#A90000] hover:text-[#A90000]"
+                      : "cursor-pointer text-gray-600 border-gray-300 hover:border-[#A90000] hover:text-[#A90000] bg-white"
                   }`}
                   title={sector.name}
                 >
@@ -535,7 +506,7 @@ const Portfolio: React.FC = () => {
                   placeholder="Search companies..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="pl-8 sm:pl-10 pr-4 py-2 w-full border border-gray-300 text-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#A90000] focus:border-transparent text-sm"
+                  className="pl-8 sm:pl-10 pr-4 py-2 w-full border border-gray-300 text-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#A90000] focus:border-transparent text-sm bg-white"
                 />
                 <svg className="absolute left-2 sm:left-3 top-2.5 h-4 w-4 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -545,12 +516,10 @@ const Portfolio: React.FC = () => {
           </div>
         </div>
 
-        {/* Portfolio Content */}
-        <div className={`transition-all duration-1200 ease-out ${
-          animationStage >= 3 ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-        }`}>
-          {/* Desktop Table - Only show on very large screens (1536px+) */}
-          <div className="hidden 2xl:block">
+        {/* Portfolio Content - Always visible */}
+        <div className="opacity-100">
+          {/* Desktop Table - Show on large screens (1280px+) */}
+          <div className="hidden xl:block">
             <div className="portfolio-table bg-white/50 backdrop-blur-sm border border-gray-200 rounded-lg overflow-hidden">
               {/* Table Header */}
               <div className="portfolio-header grid grid-cols-12 gap-4 p-6 bg-gray-50/80 border-b border-gray-200">
@@ -582,9 +551,9 @@ const Portfolio: React.FC = () => {
                     className={`portfolio-row grid grid-cols-12 gap-4 p-6 border-b border-gray-200 last:border-b-0 transition-all duration-500 cursor-pointer relative group min-h-[80px] ${
                       hoveredCompany === company.id ? 'bg-gradient-to-r from-[#A90000]/5 via-[#A90000]/3 to-transparent' : 'hover:bg-gray-50/50'
                     }`}
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 1, y: 0 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: index * 0.05 }}
+                    transition={{ duration: 0.3, delay: index * 0.02 }}
                     onMouseEnter={() => setHoveredCompany(company.id)}
                     onMouseLeave={() => setHoveredCompany(null)}
                     onClick={() => handleCompanyClick(company.website)}
@@ -598,6 +567,10 @@ const Portfolio: React.FC = () => {
                           width={32}
                           height={32}
                           className="object-contain"
+                          onError={(e) => {
+                            const target = e.target as HTMLImageElement;
+                            target.style.display = 'none';
+                          }}
                         />
                       </div>
                       <div className="min-w-0 flex-1">
@@ -657,16 +630,16 @@ const Portfolio: React.FC = () => {
             </div>
           </div>
 
-          {/* Card Layout - Show on all screens smaller than 2xl (below 1536px) */}
-          <div className="2xl:hidden space-y-3 sm:space-y-4 md:space-y-6">
+          {/* Card Layout - Show on all screens smaller than xl (below 1280px) */}
+          <div className="xl:hidden space-y-3 sm:space-y-4 md:space-y-6">
             {filteredCompanies.length > 0 ? (
               filteredCompanies.map((company, index) => (
                 <motion.div
                   key={company.id}
                   className="portfolio-card bg-white/70 backdrop-blur-sm border border-gray-200 rounded-lg p-3 sm:p-4 md:p-6 transition-all duration-300 cursor-pointer relative overflow-hidden group"
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 1, y: 0 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.05 }}
+                  transition={{ duration: 0.3, delay: index * 0.02 }}
                   onClick={() => handleCompanyClick(company.website)}
                   onMouseEnter={() => setHoveredCompany(company.id)}
                   onMouseLeave={() => setHoveredCompany(null)}
@@ -685,6 +658,10 @@ const Portfolio: React.FC = () => {
                         width={32}
                         height={32}
                         className="object-contain w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10"
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement;
+                          target.style.display = 'none';
+                        }}
                       />
                     </div>
                     
