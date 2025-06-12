@@ -412,14 +412,18 @@ const Portfolio: React.FC = () => {
     }
   ];
 
- 
-
   const filteredCompanies = companies.filter(company => {
     const matchesFilter = selectedFilter === "All" || company.sector === selectedFilter;
     const matchesSearch = company.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          company.description.toLowerCase().includes(searchTerm.toLowerCase());
     return matchesFilter && matchesSearch;
   });
+
+  const handleCompanyClick = (website: string) => {
+    if (website && website.trim() !== "") {
+      window.open(website, '_blank', 'noopener,noreferrer');
+    }
+  };
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -452,7 +456,7 @@ const Portfolio: React.FC = () => {
   return (
     <section 
       ref={sectionRef} 
-      className="portfolio-section py-16 md:py-24 lg:py-32 bg-[#FFFDF7] overflow-visible"
+      className="portfolio-section py-16 md:py-24 lg:py-32 bg-[#FFFDF7] overflow-hidden"
       id="portfolio"
     >
       {/* Background Grid Pattern */}
@@ -474,7 +478,7 @@ const Portfolio: React.FC = () => {
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header Section */}
-        <div className="mb-16 lg:mb-20">
+        <div className="mb-12 lg:mb-16">
           {/* Badge */}
           <div className={`mb-8 transition-all duration-1000 ease-out ${
             animationStage >= 1 ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
@@ -492,61 +496,63 @@ const Portfolio: React.FC = () => {
           <div className={`text-center mb-8 transition-all duration-1200 ease-out ${
             animationStage >= 1 ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
           }`}>
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl text-gray-900 leading-[1] tracking-tight font-bold mb-6">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-gray-900 leading-tight tracking-tight font-bold mb-4 md:mb-6">
               Building Tomorrow&apos;s <span className="text-[#A90000]">Industry Leaders</span>
             </h1>
-            <p className="text-gray-500 text-md font-light leading-relaxed max-w-3xl mx-auto tracking-wide">
+            <p className="text-gray-500 text-sm md:text-base font-light leading-relaxed max-w-3xl mx-auto tracking-wide px-4">
               From climate solutions to AI breakthroughs, our portfolio represents the next generation of companies solving humanity&apos;s most pressing challenges through deep science and bold execution
             </p>
           </div>
 
           {/* Filters and Search */}
-          <div className={`flex flex-col lg:flex-row items-center justify-between gap-6 transition-all duration-1000 ease-out ${
+          <div className={`flex flex-col gap-4 md:gap-6 transition-all duration-1000 ease-out ${
             animationStage >= 2 ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           }`}>
             {/* Sector Filters */}
-            <div className="flex flex-wrap gap-2 justify-center lg:justify-start">
+            <div className="flex flex-wrap gap-2 justify-center">
               {sectors.map((sector) => (
                 <button
                   key={sector.name}
                   onClick={() => setSelectedFilter(sector.name)}
-                  className={`px-4 py-2 text-sm font-medium transition-all duration-300 rounded-full border flex items-center gap-2 ${
+                  className={`px-3 md:px-4 py-2 text-xs md:text-sm font-medium transition-all duration-300 rounded-full border flex items-center gap-1 md:gap-2 ${
                     selectedFilter === sector.name
                       ? "bg-[#A90000] text-white border-[#A90000]"
                       : "cursor-pointer text-gray-600 border-gray-300 hover:border-[#A90000] hover:text-[#A90000]"
                   }`}
                   title={sector.name}
                 >
-                  <span>{sector.icon}</span>
-                  <span>{sector.name}</span>
+                  <span className="hidden sm:block">{sector.icon}</span>
+                  <span className="whitespace-nowrap">{sector.name}</span>
                 </button>
               ))}
             </div>
 
             {/* Search */}
-            <div className="relative">
-              <input
-                type="text"
-                placeholder="Search companies..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10 pr-4 py-2 w-64 border border-gray-300 text-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#A90000] focus:border-transparent text-sm"
-              />
-              <svg className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-              </svg>
+            <div className="flex justify-center">
+              <div className="relative w-full max-w-sm">
+                <input
+                  type="text"
+                  placeholder="Search companies..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="pl-10 pr-4 py-2 w-full border border-gray-300 text-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#A90000] focus:border-transparent text-sm"
+                />
+                <svg className="absolute left-3 top-2.5 h-4 w-4 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Portfolio Table */}
+        {/* Portfolio Content */}
         <div className={`transition-all duration-1200 ease-out ${
           animationStage >= 3 ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
         }`}>
-          {/* Desktop Table */}
-          <div className="hidden lg:block">
-            <div className="portfolio-table bg-white/50 backdrop-blur-sm border border-gray-200 rounded-lg overflow-visible">
-              {/* Table Header - Updated grid with better spacing */}
+          {/* Desktop Table - Only show on very large screens (1280px+) */}
+          <div className="hidden 2xl:block">
+            <div className="portfolio-table bg-white/50 backdrop-blur-sm border border-gray-200 rounded-lg overflow-hidden">
+              {/* Table Header */}
               <div className="portfolio-header grid grid-cols-12 gap-4 p-6 bg-gray-50/80 border-b border-gray-200">
                 <div className="col-span-2">
                   <span className="text-xs font-medium text-gray-500 tracking-[0.1em] uppercase">Company</span>
@@ -568,28 +574,22 @@ const Portfolio: React.FC = () => {
                 </div>
               </div>
 
-              {/* Table Body - Updated grid with better spacing and min-height */}
-              <div className="portfolio-body overflow-visible">
+              {/* Table Body */}
+              <div className="portfolio-body">
                 {filteredCompanies.map((company, index) => (
                   <motion.div
                     key={company.id}
                     className={`portfolio-row grid grid-cols-12 gap-4 p-6 border-b border-gray-200 last:border-b-0 transition-all duration-500 cursor-pointer relative group min-h-[80px] ${
                       hoveredCompany === company.id ? 'bg-gradient-to-r from-[#A90000]/5 via-[#A90000]/3 to-transparent' : 'hover:bg-gray-50/50'
                     }`}
-                    style={{ overflow: 'visible' }}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    transition={{ duration: 0.5, delay: index * 0.05 }}
                     onMouseEnter={() => setHoveredCompany(company.id)}
                     onMouseLeave={() => setHoveredCompany(null)}
-                    onClick={() => window.open(company.website, '_blank')}
+                    onClick={() => handleCompanyClick(company.website)}
                   >
-                    {/* Shiny hover effect */}
-                    <div className={`absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 transition-all duration-700 ${
-                      hoveredCompany === company.id ? 'translate-x-full opacity-100' : '-translate-x-full opacity-0'
-                    } pointer-events-none`} style={{ width: '200%', left: '-100%' }}></div>
-
-                    {/* Company Info - Fixed width and text wrapping */}
+                    {/* Company Info */}
                     <div className="col-span-2 flex items-center space-x-4 relative z-10 min-w-0">
                       <div className="company-logo w-12 h-12 bg-white rounded-lg border border-gray-200 flex items-center justify-center overflow-hidden flex-shrink-0">
                         <Image
@@ -607,35 +607,35 @@ const Portfolio: React.FC = () => {
                       </div>
                     </div>
 
-                    {/* Sector with Name - Fixed width */}
+                    {/* Sector */}
                     <div className="col-span-1 flex items-center relative z-10 min-w-0">
                       <span className="text-sm text-gray-700 font-medium break-words">
                         {company.sector}
                       </span>
                     </div>
 
-                    {/* Description - Fixed width and text wrapping */}
+                    {/* Description */}
                     <div className="col-span-4 flex items-center relative z-10 min-w-0">
                       <p className="text-sm text-gray-600 font-light leading-relaxed break-words">
                         {company.description}
                       </p>
                     </div>
 
-                    {/* Invested At - Fixed width */}
+                    {/* Invested At */}
                     <div className="col-span-1 flex items-center relative z-10 min-w-0">
                       <span className="inline-block px-3 py-1 bg-gray-100 text-gray-700 text-xs font-medium rounded-full whitespace-nowrap">
                         {company.investedAt}
                       </span>
                     </div>
 
-                    {/* Current Stage - Fixed width */}
+                    {/* Current Stage */}
                     <div className="col-span-1 flex items-center relative z-10 min-w-0">
                       <span className="inline-block px-3 py-1 bg-red-100 text-red-700 text-xs font-medium rounded-full whitespace-nowrap">
                         {company.currentStage}
                       </span>
                     </div>
 
-                    {/* Co-investors - Expanded width and text wrapping */}
+                    {/* Co-investors */}
                     <div className="col-span-3 flex items-center justify-between relative z-10 min-w-0">
                       <span className="text-sm text-gray-600 font-light break-words flex-1 mr-3">
                         {company.coinvestors.join(", ")}
@@ -657,63 +657,88 @@ const Portfolio: React.FC = () => {
             </div>
           </div>
 
-          {/* Mobile Cards - Also updated to show sector name instead of icon */}
-          <div className="lg:hidden space-y-4">
-            {filteredCompanies.map((company, index) => (
-              <motion.div
-                key={company.id}
-                className="portfolio-card bg-white/70 backdrop-blur-sm border border-gray-200 rounded-lg p-6 transition-all duration-300 cursor-pointer relative overflow-hidden group"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                onClick={() => window.open(company.website, '_blank')}
-                onMouseEnter={() => setHoveredCompany(company.id)}
-                onMouseLeave={() => setHoveredCompany(null)}
-              >
-                {/* Shiny hover effect for mobile */}
-                <div className={`absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 transition-all duration-700 ${
-                  hoveredCompany === company.id ? 'translate-x-full opacity-100' : '-translate-x-full opacity-0'
-                }`} style={{ width: '200%', left: '-100%' }}></div>
+          {/* Card Layout - Show on all screens smaller than 2xl (below 1536px) */}
+          <div className="2xl:hidden space-y-4 sm:space-y-6">
+            {filteredCompanies.length > 0 ? (
+              filteredCompanies.map((company, index) => (
+                <motion.div
+                  key={company.id}
+                  className="portfolio-card bg-white/70 backdrop-blur-sm border border-gray-200 rounded-lg p-4 sm:p-6 transition-all duration-300 cursor-pointer relative overflow-hidden group"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.05 }}
+                  onClick={() => handleCompanyClick(company.website)}
+                  onMouseEnter={() => setHoveredCompany(company.id)}
+                  onMouseLeave={() => setHoveredCompany(null)}
+                >
+                  {/* Shiny hover effect */}
+                  <div className={`absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 transition-all duration-700 ${
+                    hoveredCompany === company.id ? 'translate-x-full opacity-100' : '-translate-x-full opacity-0'
+                  }`} style={{ width: '200%', left: '-100%' }}></div>
 
-                <div className="flex items-center space-x-4 mb-4 relative z-10">
-                  <div className="company-logo w-12 h-12 bg-white rounded-lg border border-gray-200 flex items-center justify-center overflow-hidden">
-                    <Image
-                      src={company.logo}
-                      alt={`${company.name} logo`}
-                      width={32}
-                      height={32}
-                      className="object-contain"
-                    />
-                  </div>
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2 mb-1">
-                      <h3 className="text-lg font-semibold text-gray-900 tracking-tight">{company.name}</h3>
-                      <span className="text-xs px-2 py-1 bg-gray-100 text-gray-700 rounded-full font-medium">
-                        {company.sector}
-                      </span>
+                  {/* Header with logo, name, and sector */}
+                  <div className="flex items-start gap-4 mb-4 relative z-10">
+                    <div className="company-logo w-12 h-12 sm:w-14 sm:h-14 bg-white rounded-lg border border-gray-200 flex items-center justify-center overflow-hidden flex-shrink-0">
+                      <Image
+                        src={company.logo}
+                        alt={`${company.name} logo`}
+                        width={40}
+                        height={40}
+                        className="object-contain"
+                      />
                     </div>
-                    <div className="flex items-center gap-2">
-                      <span className="text-sm font-medium text-gray-700">{company.investedAt}</span>
-                      <span className="text-gray-400">•</span>
-                      <span className="text-sm text-gray-600">{company.currentStage}</span>
+                    
+                    <div className="flex-1 min-w-0">
+                      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-3">
+                        <div className="flex-1">
+                          <h3 className="text-lg sm:text-xl font-semibold text-gray-900 tracking-tight break-words mb-1">
+                            {company.name}
+                          </h3>
+                          <span className="inline-block text-xs px-2 py-1 bg-gray-100 text-gray-700 rounded-full font-medium">
+                            {company.sector}
+                          </span>
+                        </div>
+                        
+                        <svg className="w-5 h-5 text-gray-400 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                      </div>
+                      
+                      <div className="flex flex-wrap items-center gap-2 text-sm">
+                        <span className="font-medium text-gray-700 bg-blue-50 px-2 py-1 rounded text-xs">
+                          {company.investedAt}
+                        </span>
+                        <span className="text-gray-400">•</span>
+                        <span className="text-gray-600 bg-red-50 px-2 py-1 rounded text-xs">
+                          {company.currentStage}
+                        </span>
+                      </div>
                     </div>
                   </div>
-                  <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                  </svg>
-                </div>
 
-                <p className="text-sm text-gray-600 font-light leading-relaxed mb-4 relative z-10">
-                  {company.description}
-                </p>
+                  {/* Description */}
+                  <p className="text-sm text-gray-600 font-light leading-relaxed mb-4 relative z-10">
+                    {company.description}
+                  </p>
 
-                <div className="flex items-center justify-end relative z-10">
-                  <div className="text-xs text-gray-500 text-right">
-                    Co-investors: {company.coinvestors.join(", ")}
-                  </div>
-                </div>
-              </motion.div>
-            ))}
+                  {/* Co-investors */}
+                  {company.coinvestors.length > 0 && (
+                    <div className="border-t border-gray-100 pt-3 relative z-10">
+                      <div className="flex flex-col sm:flex-row sm:items-center gap-2">
+                        <span className="text-xs font-medium text-gray-500 whitespace-nowrap">Co-investors:</span>
+                        <span className="text-xs text-gray-600 break-words">
+                          {company.coinvestors.join(", ")}
+                        </span>
+                      </div>
+                    </div>
+                  )}
+                </motion.div>
+              ))
+            ) : (
+              <div className="text-center py-12">
+                <p className="text-gray-500 text-lg">No companies found matching your criteria.</p>
+              </div>
+            )}
           </div>
 
           {/* Results count */}
@@ -728,7 +753,6 @@ const Portfolio: React.FC = () => {
       <style jsx>{`
         .portfolio-section {
           position: relative;
-          overflow: visible;
         }
         
         .portfolio-section::before {
@@ -744,10 +768,14 @@ const Portfolio: React.FC = () => {
 
         .portfolio-row {
           position: relative;
-          overflow: visible;
         }
 
         .portfolio-row:hover .company-logo {
+          transform: scale(1.05);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .portfolio-card:hover .company-logo {
           transform: scale(1.05);
           box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
